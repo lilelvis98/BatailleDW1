@@ -1,0 +1,20 @@
+body{
+	background-color: LightGrey;
+}
+
+h1{
+	color:white;
+	font-family: Impact, sans-serif;
+}
+
+.section{
+	color:navy;
+	background-color: WhiteSmoke;
+	border-style:solid;
+	margin: 2%;
+	padding: 40px;
+}
+
+#entete{
+	text-align:center;
+}
