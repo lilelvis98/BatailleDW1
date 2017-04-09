@@ -4,14 +4,14 @@ Partie(@Id_Partie, #Id_Initiateur, #Id_Invite, #Id_etat, #Id_Gagnant, Date_Creat
 
 Etat_Partie(@Id_etat, libelle_etat)
 
-Bateau(@Id_bateau, @#Id_Partie, @#Id_Joueur, @Id_Type_Navire, Coord_Y, Coord_X, Id_Orientation, Etat)
+Bateau(@Id_bateau, @#Id_Partie, @#Id_Joueur, @Id_Type_Navire, Coord_Y, Coord_X, Id_Orientation, Bool_Etat)
 
 Type_Orientation(@Id_Orientation, libelle_Orientation)
 
-Type_Navire(@Id_navire, libelle_navire, Lien, Nb_Cases)
+Type_Navire(@Id_navire, libelle_navire, Lien, Nb_Cases, Image)
 
-Tour(@Id_Tour, @#Id_Partie, #Id_Joueur, #Id_Carte)
+Tour( @#Id_Partie, @Numero_Tour, #Id_Joueur, #Id_Carte)
 
-Carte(@Id_Carte, Nom_Carte, Probabilite, Rare)
+Carte(@Id_Carte, Nom_Carte, Probabilite, Image)
 
-Tir(@#Id_Carte, @Coord_Y, @Coord_X, Touche)
+Tir(@#Id_Tour, @Coord_Y, @Coord_X, Bool_Touche)
