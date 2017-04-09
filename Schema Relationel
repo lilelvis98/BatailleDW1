@@ -1,13 +1,17 @@
-Amis(@#Joueur1, @#Joueur2)
+Joueur(@Id_Joueur, Nom_Joueur, Prenom_Joueur, Date_derniere_co, Sexe, Date_Naissance, Ville_Residence, Pseudo, Mdp)
 
-Joueur(@Id_Joueur, Nom_Joueur, Prenom_Joueur, Est_Connecte, Sexe, Date_Naissance, Ville_Residence, Pseudo, Mdp_Hache)
+Partie(@Id_Partie, #Id_Initiateur, #Id_Invite, #Id_etat, #Id_Gagnant, Date_Creation)
 
-Partie(@Id_Partie, #Id_Initiateur, #Id_Invite, Etat, Gagnant, Date_Creation, Nb_Cartes_Rares_J1, Nb_Cartes_Rares_J2, Nb_Cartes_Leg_J1, Nb_Cartes_Leg_J2, Nb_Tir_J1, Nb_Tir_J2)
+Etat_Partie(@Id_etat, libelle_etat)
 
-Bateau(@Id_Partie, @#Id_Joueur, @#Nom_navire, #Id_Carte, Lien, Type, Nb_Cases, Lettre, Chiffre, Orientation, Etat)
+Bateau(@Id_bateau, @#Id_Partie, @#Id_Joueur, @Id_Type_Navire, Coord_Y, Coord_X, Id_Orientation, Etat)
+
+Type_Orientation(@Id_Orientation, libelle_Orientation)
+
+Type_Navire(@Id_navire, libelle_navire, Lien, Nb_Cases)
 
 Tour(@Id_Tour, @#Id_Partie, #Id_Joueur, #Id_Carte)
 
 Carte(@Id_Carte, Nom_Carte, Probabilite, Rare)
 
-Tir(@#Id_Carte, @Lettre, @Chiffre, Touche)
+Tir(@#Id_Carte, @Coord_Y, @Coord_X, Touche)
