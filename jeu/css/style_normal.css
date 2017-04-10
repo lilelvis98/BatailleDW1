@@ -1,17 +1,45 @@
 body{
-	background-color: LightGrey;
+	background-color: #6699cc;
+	font-family: Impact, sans-serif;
 }
 
 h1{
 	color:white;
-	font-family: Impact, sans-serif;
 	text-align: center;
 }
 
-#boiteconnexion {
-    background-color: grey;
-    width: 400px;
-    border: 12px solid navy;
-    padding: 30px;
-    margin-left: 50%;
+#boiteconnexion{
+	background-color: #c6d9ec;
+ 	width: 300px;
+ 	border: 12px solid #2d5986;
+	border-bottom: 3px dotted #2d5986;
+ 	padding: 20px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+#boiteinscription{
+	background-color: #c6d9ec;
+ 	width: 300px;
+ 	border: 12px solid #2d5986;
+	border-top: none;
+ 	padding: 20px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+#centrer{
+	text-align: center;
+}
+
+input.connexion {
+	width: 90px;
+	height: 30px;
+	background-color: #00cc00;
+}
+
+input.inscription {
+	width: 90px;
+	height: 30px;
+	background-color: #0099ff;
 }
