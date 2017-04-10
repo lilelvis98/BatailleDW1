@@ -1,7 +1,6 @@
-<!DOCTYPE html>
-<html>
-	<head>
+<?php
 
+<<<<<<< HEAD
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 		<link rel="stylesheet" type="text/css" href="css/style_normal.css">
 		<title>La Bataille Navale</title>
@@ -25,3 +24,6 @@
 		
 	</body>
 </html>
+=======
+?>
+>>>>>>> f3a55837e1bff7a4e4233e26c9863e36c379275f
