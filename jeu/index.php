@@ -49,15 +49,6 @@
 				</p>
 			</div>
 		</div>
-
-		<?php
-			global $connexion;
-			$sql = "SELECT valeur FROM TestINT WHERE nom = 'ENTIERUN'";
-			$result = $connexion->query($sql);
-			$row = mysqli_fetch_assoc($result);
-			echo $row["valeur"];
-			deconnexion_bd();
-		?>
 	</body>
 </html>
 
