@@ -5,16 +5,16 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 		<link rel="stylesheet" type="text/css" href="css/style_normal.css">
 		<title>La Bataille Navale</title>
-		<?php
+		<!--<?php
 			require_once('./fonctions.php');
-		?>
+		?> -->
 
 	</head>
 	<body>
-		<?php
+		<!--<?php
 			//connexion à la base de données
 			connexion_bd();
-		?>
+		?>-->
 		<br/>
 		<h1>Bienvenue et inscris-toi, matelot !</h1>
 		<br/><br/>
