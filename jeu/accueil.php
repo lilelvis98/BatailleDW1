@@ -8,7 +8,8 @@
 	</head>
 
 	<body>
-		<h1>Bienvenue, <?php echo $POST["pseudoJoueur"];?> !</h1>
+		<?php session_start(); ?>
+		<h1>Bienvenue, <?php echo $_SESSION['pseudo_joueur'];?> !</h1>
 
 	</body>
 </html>

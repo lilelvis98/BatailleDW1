@@ -9,10 +9,8 @@
 
 	<body>
 		<?php
+			session_start();
 			require_once('./fonctions.php');
-
-			//connexion à la base de données
-			connexion_bd();
 		?>
 
 		<h1>Bonjour et bienvenue, matelot !</h1><br />
@@ -21,21 +19,35 @@
 		<div id="boiteconnexion">
 			<div id="centrer">
 				<p>Connexion</p>
-				<form method='POST' action='./connexion.php'>
+				<form method='POST' action='./index.php'>
 					<p>
 						<input id="pseudoJ" name="pseudoJoueur" type="text" placeholder="Pseudo" />
 					</p>
 					<p>
 						<input id="mdp" name="motDePasse" type="password" placeholder="Mot de Passe" />
 					</p>
+					<div id="erreur"><!--div de connexion -->
+						<?php
+							if(isset($_POST["pseudoJoueur"]) && isset($_POST["motDePasse"]))
+							{
+								connexion_bd();
+								connexion_site($_POST['pseudoJoueur'], $_POST['motDePasse']);
+
+								global $est_connecte;
+								if ($est_connecte){
+									$_SESSION['pseudo_joueur'] = $_POST['pseudoJoueur'];
+
+									header("Location: http://localhost/BatailleDW1/jeu/accueil.php");
+								}else{echo "Identifiant ou Mot de Passe incorrect.";}
+							}
+						?>
+					</div>
 					<p>
 						<input id="clico" name="cliqueconnexion" type="submit" value="Se Connecter" class="connexion"/>
 					</p>
 				</form>
 			</div>
 		</div>
-
-<!-- Div d'erreur de co -->
 
 		<!-- Formulaire d'inscription -->
 		<div id="boiteinscription">
