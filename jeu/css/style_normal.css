@@ -88,3 +88,8 @@ input.inscription {
 	height: 30px;
 	background-color: #0099ff;
 }
+
+#erreur {
+	font-size:70%;
+	color: red;
+}
