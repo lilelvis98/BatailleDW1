@@ -10,6 +10,11 @@
 	<body>
 		<?php session_start(); ?>
 		<h1>Bienvenue, <?php echo $_SESSION['pseudo_joueur'];?> !</h1>
-
+		<div>
+				<button id="acceuil_jouer" type="submit" value="JOUER"/>
+		</div>
+		<div>
+				<button id="accueil_stat" type="submit" value="STATISTIQUES"/>
+		</div>
 	</body>
 </html>

@@ -46,6 +46,37 @@ h1{
 	text-align: center;
 }
 
+#boutons_accueil
+{
+	display: inline;
+}
+
+#bouton_jouer
+{
+	margin-left: 6%;
+	width: 30%;	
+	height: 30%;
+	min-height: 350px;
+	top: 500px;	
+}
+
+#bouton_stats
+{
+	margin-left: 5%;
+	width: 20%;	
+	height: 30%;
+	min-height: 350px;
+	margin-top: 50px;
+	
+}
+
+#tab_contacts
+{
+	float: left;	
+	width: 20%;
+}
+
+
 input.connexion {
 	width: 110px;
 	height: 30px;
