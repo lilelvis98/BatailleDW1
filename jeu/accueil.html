@@ -9,12 +9,15 @@
 
 	<body>
 		<h1>Bienvenue, <!--<?php echo $POST["pseudoJoueur"];?> !--></h1>
-		<div>
-				<button id="acceuil_jouer" type="submit" value="JOUER"/>
+		<div id="boutons_accueil">
+			<form id="bouton_accueil" action='jouer.html'>
+				
+				<button id="bouton_stats" type="submit" formaction="statistiques.html">STATISTIQUES</button>
+				<button id="bouton_jouer" type="submit">JOUER</button>
+			</form>
+			<table id="tab_contacts">
+				<tr>Contacts</tr>
+			</table>
 		</div>
-		<div>
-				<button id="accueil_stat" type="submit" value="STATISTIQUES"/>
-		</div>
-
 	</body>
 </html>
