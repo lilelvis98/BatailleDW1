@@ -5,16 +5,14 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 		<link rel="stylesheet" type="text/css" href="css/style_normal.css">
 		<title>La Bataille Navale</title>
-		<!--<?php
+		<?php
+			session_start();
 			require_once('./fonctions.php');
-		?> -->
+			require_once('./fonctions_inscription.php');
+		?>
 
 	</head>
 	<body>
-		<!--<?php
-			//connexion à la base de données
-			connexion_bd();
-		?>-->
 		<br/>
 		<h1>Bienvenue et inscris-toi, matelot !</h1>
 		<br/><br/>
@@ -37,7 +35,7 @@
 					<label>F<input type="radio" name="sexe" id="homme" value="Homme"></label>
 					<label>H<input type="radio" name="sexe" id="femme" value="Femme"></label>
 					<p>
-						<div id="ChampsObligatoires">*<input id="Date_Naiss" name="DateNaissance" type="text" size= 20 maxlength=20 placeholder="Date de Naissance" value="MM / J J / AAAA" /></div>
+						<div id="ChampsObligatoires">*<input id="Date_Naiss" name="DateNaissance" type="text" size= 20 maxlength=20 placeholder="Date de Naissance" value="AAAA/MM/JJ" /></div>
 					</p>
 					<p>
 						<div id="ChampsObligatoires"></div><input id="Ville_Res" name="VilleResidence" type="text" size= 20 maxlength=20 placeholder="Ville de résidence" />
@@ -50,11 +48,26 @@
 					</p>
 					<br/>
 					<p>
-						<input id="clici" name="cliqueinscription" type="submit" value="S'inscrire" class="inscription"/>
+						<input id="cliva" name="cliquevalider" type="submit" value="S'inscrire" class="inscription"/>
 					</p>
 
 					</form>
 				</p>
+				<div id="erreur"><!--div de connexion -->
+					<?php
+						if(isset($_POST["cliquevalider"]))
+						{
+							inscription_site($_POST['pseudoJoueur'], $_POST['motDePasse']);
+
+							global $est_connecte;
+							if ($est_connecte){
+								$_SESSION['pseudo_joueur'] = $_POST['pseudoJoueur'];
+
+								header("Location: http://localhost/BatailleDW1/jeu/accueil.php");
+							}else{echo "Identifiant ou Mot de Passe incorrect.";}
+						}
+					?>
+				</div>
 			</div>
 		</div>
 
