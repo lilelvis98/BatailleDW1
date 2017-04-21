@@ -24,27 +24,30 @@
 
 					<div>Formulaire d'inscription</div><br/>
 					<div id="ChampsObligatoires">* Ces champs sont requis</div>
-					<form method='POST' action='./accueil.php'>
+					<form method='POST' action='./inscription.php'>
 					<br/>
 					<p>
-						<div id="ChampsObligatoires">*<input id="Nom_Joueur" name="Nom" type="text" size= 20 maxlength=20 placeholder="Nom" /></div>
+						<div id="ChampsObligatoires">*<input id="nomJ" name="nomJoueur" type="text" size= 20 maxlength=20 placeholder="Nom" /></div>
 					</p>
 					<p>
-						<div id="ChampsObligatoires">*<input id="Prenom" name="Prenom" type="text" size= 20 maxlength=20 placeholder="Prenom" /></div>
+						<div id="ChampsObligatoires">*<input id="prenomJ" name="prenomJoueur" type="text" size= 20 maxlength=20 placeholder="Prenom" /></div>
 					</p>
-					<label>F<input type="radio" name="sexe" id="homme" value="Homme"></label>
-					<label>H<input type="radio" name="sexe" id="femme" value="Femme"></label>
+					<label>F<input type="radio" name="sexeJoueur" id="homme" value="Homme" CHECKED></label>
+					<label>H<input type="radio" name="sexeJoueur" id="femme" value="Femme"></label>
 					<p>
-						<div id="ChampsObligatoires">*<input id="Date_Naiss" name="DateNaissance" type="text" size= 20 maxlength=20 placeholder="Date de Naissance" value="AAAA/MM/JJ" /></div>
-					</p>
-					<p>
-						<div id="ChampsObligatoires"></div><input id="Ville_Res" name="VilleResidence" type="text" size= 20 maxlength=20 placeholder="Ville de résidence" />
+						<div id="ChampsObligatoires">*<input id="dateNaissJ" name="dateNaissanceJoueur" type="text" size= 20 maxlength=20 placeholder="Date de Naissance" value="AAAA/MM/JJ" /></div>
 					</p>
 					<p>
-						<div id="ChampsObligatoires">*<input id="Pseudo" name="Pseudo" type="text" size=20 maxlength=15 placeholder="Pseudo"/></div>
+						<div id="ChampsObligatoires"></div><input id="villeResJ" name="villeResidenceJoueur" type="text" size= 20 maxlength=20 placeholder="Ville de résidence" />
 					</p>
 					<p>
-						<div id="ChampsObligatoires">*<input id="mdp" name="motDePasse" size=20 maxlength=20 type="password" placeholder="Mot de Passe" /></div>
+						<div id="ChampsObligatoires">*<input id="pseudoJ" name="pseudoJoueur" type="text" size=20 maxlength=15 placeholder="Pseudo"/></div>
+					</p>
+					<p>
+						<div id="ChampsObligatoires">*<input id="mdpJ" name="motDePasse" size=20 maxlength=20 type="password" placeholder="Mot de Passe" /></div>
+					</p>
+					<p>
+						<div id="ChampsObligatoires">*<input id="mdpJCONF" name="motDePasseConf" size=20 maxlength=20 type="password" placeholder="Confirmez le MDP" /></div>
 					</p>
 					<br/>
 					<p>
@@ -53,26 +56,25 @@
 
 					</form>
 				</p>
-				<div id="erreur"><!--div de connexion -->
+				<div id="erreur"><!--div d'inscription -->
 					<?php
-						if(isset($_POST["cliquevalider"]))
+						//Quand les infos ont été entrées, on tente d'inscrire l'utilisateur
+						if(isset($_POST["nomJoueur"]))
 						{
-							inscription_site($_POST['pseudoJoueur'], $_POST['motDePasse']);
+							if ($_POST["sexeJoueur"] === "Homme"){$sexe = 1;}else{$sexe = 0;}
+							inscription_site($_POST['nomJoueur'], $_POST['prenomJoueur'], $sexe, $_POST['dateNaissanceJoueur'], $_POST['villeResidenceJoueur'], $_POST['pseudoJoueur'], $_POST['motDePasse'], $_POST['motDePasseConf']);
 
-							global $est_connecte;
-							if ($est_connecte){
+							global $inscription_faite;
+							if ($inscription_faite){
 								$_SESSION['pseudo_joueur'] = $_POST['pseudoJoueur'];
-
 								header("Location: http://localhost/BatailleDW1/jeu/accueil.php");
-							}else{echo "Identifiant ou Mot de Passe incorrect.";}
+							}
+							else{echo $erreur_inscription;}
 						}
 					?>
 				</div>
 			</div>
 		</div>
-
-
-		<!-- Div d'erreur de co -->
 		
 	</body>
 </html>

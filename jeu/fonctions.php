@@ -29,5 +29,23 @@
 		mysqli_close($connexion);
 	}
 
+	function connexion_pdo_bd(){
+		try
+		{
+			//Paramètres de la connexion
+			$bd = "L2IF83_BD" ;
+			$user = "L2IF83"  ;
+			$passwd = "DHR2GVA"  ;
+			$machine = "localhost" ;
+
+			global $connexion;
+			$connexion = new PDO("mysql:host=$machine;dbname=$bd", $user, $passwd);
+		}
+		catch(Exception $e)
+		{
+				die('Erreur : '.$e->getMessage());
+		}
+	}
+
 ?>
 

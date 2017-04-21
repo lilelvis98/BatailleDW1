@@ -25,7 +25,7 @@
 						<input id="pseudoJ" name="pseudoJoueur" type="text" placeholder="Pseudo" />
 					</p>
 					<p>
-						<input id="mdp" name="motDePasse" type="password" placeholder="Mot de Passe" />
+						<input id="mdpJ" name="motDePasse" type="password" placeholder="Mot de Passe" />
 					</p>
 					<div id="erreur"><!--div de connexion -->
 						<?php
@@ -39,7 +39,7 @@
 									global $connexion;
 									$_SESSION['pseudo_joueur'] = $_POST['pseudoJoueur'];
 									$_SESSION['connexion'] = $connexion;
-
+									//^Si la connexion est faite, on garde le pseudo et la connexion^
 									header("Location: http://localhost/BatailleDW1/jeu/accueil.php");
 								}else{echo "Identifiant ou Mot de Passe incorrect.";}
 							}
