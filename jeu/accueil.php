@@ -10,11 +10,17 @@
 	<body>
 		<?php session_start(); ?>
 		<h1>Bienvenue, <?php echo $_SESSION['pseudo_joueur'];?> !</h1>
-		<div>
-				<button id="acceuil_jouer" type="submit" value="JOUER"/>
-		</div>
-		<div>
-				<button id="accueil_stat" type="submit" value="STATISTIQUES"/>
+		<div id="boutons_accueil">
+			<form id="bouton_accueil" action='jouer.php'>
+				<button id="bouton_stats" type="submit" formaction="statistiques.php">STATISTIQUES</button>
+				<button id="bouton_jouer" type="submit">JOUER</button>
+				<table id="tab_contacts">
+					<th id="th_contact">Contacts</th>
+					<tr id="marge_avant_contacts"></tr>
+					<?php getamis(); ?>
+				</table>
+			</form>
+			
 		</div>
 	</body>
 </html>
