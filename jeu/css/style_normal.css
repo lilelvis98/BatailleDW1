@@ -121,6 +121,9 @@ input.connexion {
 	width: 90px;
 	height: 20px;
 	background-color: #00b300;
+	width: 110px;
+	height: 30px;
+	background-color: #00cc00;
 }
 
 input.inscription {

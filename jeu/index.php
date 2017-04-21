@@ -11,6 +11,7 @@
 		<?php
 			session_start();
 			require_once('./fonctions.php');
+			require_once('./fonctions_index.php');
 		?>
 
 		<h1>Bonjour et bienvenue, matelot !</h1><br />
@@ -35,7 +36,9 @@
 
 								global $est_connecte;
 								if ($est_connecte){
+									global $connexion;
 									$_SESSION['pseudo_joueur'] = $_POST['pseudoJoueur'];
+									$_SESSION['connexion'] = $connexion;
 
 									header("Location: http://localhost/BatailleDW1/jeu/accueil.php");
 								}else{echo "Identifiant ou Mot de Passe incorrect.";}
