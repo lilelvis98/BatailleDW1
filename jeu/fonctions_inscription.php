@@ -6,7 +6,9 @@
 
 	//Fonction d'inscription au site
 	function inscription_site($nom_insc, $prenom_insc, $sexe_insc, $date_naiss_insc, 			  	 	 						  $ville_res_insc, $pseudo_insc, $mdp_insc, $mdp_conf_insc){
-		connexion_bd();
+
+		global $inscription_faite;
+		$connexion = $_SESSION["connexion"];
 		//On check si tous les champs obligatoires sont entrés --Vishnu pardonne-moi pour cette horreur de ifs
 		//Note : on a pas trop le temps d'essayer d'empêcher les injections SQL, on a plus qu'à prier pour que les gens ne soient pas des saligauds
 		if (ctype_space($nom_insc) || $nom_insc == ''){
@@ -42,17 +44,24 @@
 			else{
 				//On inscrit l'utilisateur !
 				$sql = "SELECT MAX(Id_Joueur) AS id FROM Joueur";
-				$resultat = $connexion->query($sql);
+				$resultat = mysqli_query($connexion, $sql);
 				$id_insc_arr = mysqli_fetch_assoc($resultat);
 				$id_insc = $id_insc_arr["id"];
-				$erreur_inscription = $id_insc;
+				if ($id_insc === null){$id_insc = 1;}
+				else{$id_insc++;}
 				$mdp_hache = password_hash($mdp_insc, PASSWORD_DEFAULT);
 				$erreur_inscription = " . ";
 				
-				connexion_pdo_bd();
+				
 				$sql = "INSERT INTO Joueur(Id_Joueur, Nom_Joueur, Prenom_Joueur, Sexe, Date_Naissance, Ville_Residence, Pseudo, Mdp) VALUES ($id_insc, '$nom_insc', '$prenom_insc', $sexe_insc, '$date_naiss_insc', '$ville_res_insc', '$pseudo_insc', '$mdp_hache')";
-				$connexion->exec($sql);
-   				$inscription_faite = true;
+				$resultat = mysqli_query($connexion, $sql);
+				echo $resultat;
+				if ($resultat) {
+					$inscription_faite = true;
+					$_SESSION["id_joueur"] = $id_insc;
+				} else {
+    			echo "Error: " . $sql . "<br>" . $connexion->error;
+				}
 			}
 		}
 	}

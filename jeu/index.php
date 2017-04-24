@@ -1,3 +1,6 @@
+<?php session_start(); 
+?>
+
 <!DOCTYPE html>
 <html>
 	<head>
@@ -9,7 +12,7 @@
 
 	<body>
 		<?php
-			session_start();
+			
 			require_once('./fonctions.php');
 			require_once('./fonctions_index.php');
 		?>
@@ -31,7 +34,6 @@
 						<?php
 							if(isset($_POST["pseudoJoueur"]) && isset($_POST["motDePasse"]))
 							{
-								connexion_bd();
 								connexion_site($_POST['pseudoJoueur'], $_POST['motDePasse']);
 
 								global $est_connecte;
@@ -40,7 +42,7 @@
 									$_SESSION['pseudo_joueur'] = $_POST['pseudoJoueur'];
 									$_SESSION['connexion'] = $connexion;
 									//^Si la connexion est faite, on garde le pseudo et la connexion^
-									header("Location: http://localhost/BatailleDW1/jeu/accueil.php");
+									header("Location: http://bdw1.univ-lyon1.fr/p1507338/projet/jeu/accueil.php");
 								}else{echo "Identifiant ou Mot de Passe incorrect.";}
 							}
 						?>

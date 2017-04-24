@@ -1,3 +1,5 @@
+<?php session_start(); ?>
+
 <!DOCTYPE html>
 <html>
 	<head>
@@ -6,7 +8,6 @@
 		<link rel="stylesheet" type="text/css" href="css/style_normal.css">
 		<title>La Bataille Navale</title>
 		<?php
-			session_start();
 			require_once('./fonctions.php');
 			require_once('./fonctions_inscription.php');
 		?>
@@ -63,11 +64,10 @@
 						{
 							if ($_POST["sexeJoueur"] === "Homme"){$sexe = 1;}else{$sexe = 0;}
 							inscription_site($_POST['nomJoueur'], $_POST['prenomJoueur'], $sexe, $_POST['dateNaissanceJoueur'], $_POST['villeResidenceJoueur'], $_POST['pseudoJoueur'], $_POST['motDePasse'], $_POST['motDePasseConf']);
-
-							global $inscription_faite;
+							
 							if ($inscription_faite){
 								$_SESSION['pseudo_joueur'] = $_POST['pseudoJoueur'];
-								header("Location: http://localhost/BatailleDW1/jeu/accueil.php");
+								header("Location: http://bdw1.univ-lyon1.fr/p1507338/projet/jeu/accueil.php");
 							}
 							else{echo $erreur_inscription;}
 						}
