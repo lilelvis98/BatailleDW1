@@ -12,10 +12,10 @@
 		//Paramètres de la connexion
 		$bd = "L2IF83_DB" ;
 		$user = "L2IF83"  ;
-		$passwd = "DHR2GVA"  ;
+		$passwd = "DHR2GVA" ;
 		$machine = "localhost" ;
 
-		$connexion = mysqli_connect ( $machine , $user , $passwd , $bd ) ;
+		$connexion = mysqli_connect( $machine , $user , $passwd , $bd ) ;
 
 		//En cas d'erreur
 		if(mysqli_connect_errno ()){

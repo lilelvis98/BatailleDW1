@@ -8,6 +8,7 @@
 		
 		<title>La Bataille Navale</title>
 		<?php
+			require_once('./fonctions.php');			
 			require_once('./fonctions_accueil.php');
 		?>
 	</head>
