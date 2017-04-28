@@ -42,7 +42,7 @@
 									$_SESSION['pseudo_joueur'] = $_POST['pseudoJoueur'];
 									$_SESSION['connexion'] = $connexion;
 									//^Si la connexion est faite, on garde le pseudo et la connexion^
-									header("Location: http://bdw1.univ-lyon1.fr/p1507338/projet/jeu/accueil.php");
+									header("Location: accueil.php");
 								}else{echo "Identifiant ou Mot de Passe incorrect.";}
 							}
 						?>

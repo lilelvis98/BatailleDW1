@@ -1,5 +1,5 @@
 <?php
-	if (empty($erreur_inscription)){
+	if ($_SESSION["erreur_inscription"] === null){
 		$erreur_inscription = "erreur -inconnue";
 	}
 	$inscription_faite = false;
@@ -9,7 +9,7 @@
 
 		global $inscription_faite;
 		$connexion = $_SESSION["connexion"];
-		//On check si tous les champs obligatoires sont entrés --Vishnu pardonne-moi pour cette horreur de ifs
+		//On check si tous les champs obligatoires sont entrés --Vishnu pardonne-moi pour cette horreur de if
 		//Note : on a pas trop le temps d'essayer d'empêcher les injections SQL, on a plus qu'à prier pour que les gens ne soient pas des saligauds
 		if (ctype_space($nom_insc) || $nom_insc == ''){
 			$erreur_inscription = "Veuillez entrer votre Nom.";
@@ -17,7 +17,7 @@
 		else if (ctype_space($prenom_insc) || $prenom_insc == ''){
 			$erreur_inscription = "Veuillez entrer votre Prenom.";
 		}
-		else if (ctype_space($date_naiss_insc) || $date_naiss_insc == '' /*|| !(preg_match("/^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/",$date_naiss_insc))*/){
+		else if (ctype_space($date_naiss_insc) || $date_naiss_insc == '' || !(preg_match("/^[0-9]{4}\/(0[1-9]|1[0-2])\/(0[1-9]|[1-2][0-9]|3[0-1])$/",$date_naiss_insc))){
 			$erreur_inscription = "Veuillez entrer votre Date de Naissance correctement : AAAA/MM/JJ";
 		}
 		else if (ctype_space($pseudo_insc) || $pseudo_insc == ''){
@@ -50,7 +50,7 @@
 				if ($id_insc === null){$id_insc = 1;}
 				else{$id_insc++;}
 				$mdp_hache = password_hash($mdp_insc, PASSWORD_DEFAULT);
-				$erreur_inscription = " . ";
+				$erreur_inscription = "  ";
 				
 				
 				$sql = "INSERT INTO Joueur(Id_Joueur, Nom_Joueur, Prenom_Joueur, Sexe, Date_Naissance, Ville_Residence, Pseudo, Mdp) VALUES ($id_insc, '$nom_insc', '$prenom_insc', $sexe_insc, '$date_naiss_insc', '$ville_res_insc', '$pseudo_insc', '$mdp_hache')";
@@ -64,6 +64,7 @@
 				}
 			}
 		}
+		$_SESSION["erreur_inscription"] = $erreur_inscription;
 	}
 ?>
 

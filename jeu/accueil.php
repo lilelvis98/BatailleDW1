@@ -8,7 +8,6 @@
 		
 		<title>La Bataille Navale</title>
 		<?php
-			require_once('./fonctions.php');
 			require_once('./fonctions_accueil.php');
 		?>
 	</head>
@@ -22,7 +21,7 @@
 				<table id="tab_contacts">
 					<th id="th_contact">Contacts</th>
 					<tr id="marge_avant_contacts"></tr>
-					<?php 
+					<?php
 						getamis(); 
 					?>
 				</table>

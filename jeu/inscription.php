@@ -69,7 +69,7 @@
 								$_SESSION['pseudo_joueur'] = $_POST['pseudoJoueur'];
 								header("Location: http://bdw1.univ-lyon1.fr/p1507338/projet/jeu/accueil.php");
 							}
-							else{echo $erreur_inscription;}
+							else{echo $_SESSION['erreur_inscription'];}
 						}
 					?>
 				</div>
