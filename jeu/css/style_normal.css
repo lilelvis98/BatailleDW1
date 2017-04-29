@@ -28,6 +28,14 @@ h1{
 	margin-right: auto;
 }
 
+#boiteinvitation{
+	background-color: #c6d9ec;
+ 	width: 300px;
+ 	border: 12px solid #2d5986;
+ 	padding: 20px;
+	float: left;
+}
+
 #boiteinscription2{
 	background-color: #c6d9ec;
  	width: 300px;

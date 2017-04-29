@@ -1,5 +1,4 @@
-<?php session_start(); 
-?>
+<?php session_start(); ?>
 
 <!DOCTYPE html>
 <html>
@@ -12,7 +11,6 @@
 
 	<body>
 		<?php
-			
 			require_once('./fonctions.php');
 			require_once('./fonctions_index.php');
 		?>

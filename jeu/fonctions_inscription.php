@@ -43,19 +43,22 @@
 			}
 			else{
 				//On inscrit l'utilisateur !
+
+				//On commence par déterminer le plus gros Id des Joueurs de la base de donnée et on y ajoute 1. Ce sera l'id du nouvel inscrit
 				$sql = "SELECT MAX(Id_Joueur) AS id FROM Joueur";
 				$resultat = mysqli_query($connexion, $sql);
 				$id_insc_arr = mysqli_fetch_assoc($resultat);
 				$id_insc = $id_insc_arr["id"];
 				if ($id_insc === null){$id_insc = 1;}
 				else{$id_insc++;}
+
+				//On hache le mdp du nouvel inscrit
 				$mdp_hache = password_hash($mdp_insc, PASSWORD_DEFAULT);
 				$erreur_inscription = "  ";
 				
-				
+				//On insère le tuple dans la base de données
 				$sql = "INSERT INTO Joueur(Id_Joueur, Nom_Joueur, Prenom_Joueur, Sexe, Date_Naissance, Ville_Residence, Pseudo, Mdp) VALUES ($id_insc, '$nom_insc', '$prenom_insc', $sexe_insc, '$date_naiss_insc', '$ville_res_insc', '$pseudo_insc', '$mdp_hache')";
 				$resultat = mysqli_query($connexion, $sql);
-				echo $resultat;
 				if ($resultat) {
 					$inscription_faite = true;
 					$_SESSION["id_joueur"] = $id_insc;
