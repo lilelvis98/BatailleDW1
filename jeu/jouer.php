@@ -11,9 +11,10 @@
 
 	<body>
 		<?php
+			require_once('./fonctions.php');
 			require_once('./fonctions_jouer.php');
 		?>
-		<h1> Invitez un Joueur à une nouvelle Partie ou reprenez une partie en cours ! </h1><br />
+		<h1> Invitez un Joueur à une nouvelle partie ou reprenez une partie en cours ! </h1><br />
 
 		<div id="boiteinvitation">
 			<p>Invitez un Joueur en entrant son Pseudo</p>

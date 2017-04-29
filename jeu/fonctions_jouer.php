@@ -11,11 +11,11 @@
 		global $pseudo_incorrect;
 		global $invitation_correcte;
 		global $id_invitant;
-		echo $id_invitant;
+		$id_invitant = $_SESSION["id_joueur"];
 
 		$sql = "SELECT * FROM Joueur WHERE Pseudo = '$pseudo_invite'";
-		$resultat = $connexion->query($sql) /*or die("echec critique2 <br/>".mysqli_error())*/;
-		if (!$resultat){echo "MARCHE PO";}
+		$resultat = $connexion->query($sql);
+
 		//On vérifie que son Pseudo existe
 		if (!($resultat->num_rows > 0)){
 				$pseudo_incorrect = true;
@@ -26,6 +26,7 @@
 			//On récupère l'Id_Joueur du Pseudo entré
 			$id_a_parser = mysqli_fetch_assoc($resultat);
 			$id_invite = $id_a_parser["Id_Joueur"];
+			echo $id_invite . "<br/>" . $id_invitant;//temporaire
 
 			if ($id_invite === $id_invitant){//On vérifie qu'il ne s'invite pas lui-même
 				$pseudo_incorrect = true;
@@ -34,7 +35,7 @@
 				$sql = "SELECT * FROM Partie WHERE ((Id_Initiateur = $id_invitant AND Id_Invite = $id_invite) OR (Id_Initiateur = $id_invite AND ID_Invite = $id_invitant)) AND Id_Etat <> 2";
 				$resultat = $connexion->query($sql);
 
-				if ($resultat->num_rows == 0){
+				if ($resultat->num_rows > 0){
 					//Les joueurs ont déjà une partie, on ne fait rien
 				}
 				else{
@@ -49,8 +50,9 @@
 					else{$id_partie++;}
 
 					$temps = date("Y-m-d");
+
 					//On crée la nouvelle partie en insérant le tuple
-					$sql = "INSERT INTO Partie(Id_Partie, Id_Initiateur, Id_Invite, Id_Etat, Id_Gagnant, Date_Creation) VALUES ($id_partie, $id_invitant, $id_invite, 1, NULL, $temps)";
+					$sql = "INSERT INTO Partie(Id_Partie, Id_Initiateur, Id_Invite, Id_Etat, Id_Gagnant, Date_Creation) VALUES ($id_partie, $id_invitant, $id_invite, 1, NULL, '$temps')";
 					$resultat = mysqli_query($connexion, $sql);
 					if ($resultat) {
 						$invitation_correcte = true;

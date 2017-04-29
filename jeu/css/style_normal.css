@@ -19,9 +19,9 @@ h1{
 }
 
 #boiteinscription{
-	background-color: #c6d9ec;
+	background-color: #ffff80;
  	width: 300px;
- 	border: 12px solid #2d5986;
+ 	border: 12px solid #ff8533;
 	border-top: none;
  	padding: 20px;
 	margin-left: auto;
@@ -29,11 +29,12 @@ h1{
 }
 
 #boiteinvitation{
-	background-color: #c6d9ec;
- 	width: 300px;
- 	border: 12px solid #2d5986;
+	background-color: #ffe680;
+ 	width: 30%;
+ 	border: 16px solid #ffcc66;
  	padding: 20px;
 	float: left;
+	text-align: center;
 }
 
 #boiteinscription2{
