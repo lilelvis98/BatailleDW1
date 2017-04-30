@@ -1,23 +1,95 @@
 <?php
-	/*$id_joueur = $_SESSION["id_joueur"];
+	$id_joueur = $_SESSION["id_joueur"];
 	$id_partie = $_SESSION["id_partie"];
-	$connexion = $_SESSION['connexion'];*/
+	$connexion = $_SESSION["connexion"];
 
 	function getGrilleperso()
 	{
-		/*global $id_joueur;
+		global $id_joueur;
 		global $connexion;
 		global $id_partie;
-		
-		$sql = "SELECT j.Pseudo AS Pseudo , Max(p.Date_Creation) AS Max_Date, p.Id_Etat AS Id_Etat FROM Joueur j JOIN Partie p ON j.Id_Joueur = p.Id_Initiateur OR j.Id_Joueur = p.Id_Invite WHERE j.Id_Joueur != $id_joueur AND (p.Id_Invite = $id_joueur OR p.Id_Initiateur = $id_joueur) GROUP BY p.Id_Etat, j.Pseudo, j.Date_Derniere_Co ORDER BY p.Id_Etat";
+
+		//Porte-avion
+		$sql = "SELECT b.Coord_X AS X, b.Coord_Y AS Y, b.Bool_Orientation AS Orientation FROM b Bateau NATURAL JOIN n Type_Navire WHERE b.Id_Partie != $id_partie AND b.Id_Joueur = $id_joueur AND b.Type_Navire = 0";
 
 		$result = $connexion->query($sql) or die("echec critique2 <br/>".mysqli_error());
 
 		if($result == FALSE) // échec si FALSE
 		{
 			echo "Échec de la requête6 <br/>";
-		}*/
+		}
 
+		$data = mysqli_fetch_assoc($result) //Découpage du résultat
+		$Nb_cases_0 = 0;
+		$X_0 = $data['X'];
+		$Y_0 = $data['Y'];
+		$Orientation_0 = $data['Orientation'];
+
+		//Croiseur
+		$sql = "SELECT b.Coord_X AS X, b.Coord_Y AS Y, b.Bool_Orientation AS Orientation FROM b Bateau NATURAL JOIN n Type_Navire WHERE b.Id_Partie != $id_partie AND b.Id_Joueur = $id_joueur AND b.Type_Navire = 1";
+
+		$result = $connexion->query($sql) or die("echec critique2 <br/>".mysqli_error());
+
+		if($result == FALSE) // échec si FALSE
+		{
+			echo "Échec de la requête6 <br/>";
+		}
+
+		$data = mysqli_fetch_assoc($result) //Découpage du résultat
+		$Nb_cases_1 = 0;
+		$X_1 = $data['X'];
+		$Y_1 = $data['Y'];
+		$Orientation_1 = $data['Orientation'];
+
+		//Destroyeur
+		$sql = "SELECT b.Coord_X AS X, b.Coord_Y AS Y, b.Bool_Orientation AS Orientation FROM b Bateau NATURAL JOIN n Type_Navire WHERE b.Id_Partie != $id_partie AND b.Id_Joueur = $id_joueur AND b.Type_Navire = 2";
+
+		$result = $connexion->query($sql) or die("echec critique2 <br/>".mysqli_error());
+
+		if($result == FALSE) // échec si FALSE
+		{
+			echo "Échec de la requête6 <br/>";
+		}
+
+		$data = mysqli_fetch_assoc($result) //Découpage du résultat
+		$Nb_cases_2 = 0;
+		$X_2 = $data['X'];
+		$Y_2 = $data['Y'];
+		$Orientation_2 = $data['Orientation'];
+
+		//Sous_marin
+		$sql = "SELECT b.Coord_X AS X, b.Coord_Y AS Y, b.Bool_Orientation AS Orientation FROM b Bateau NATURAL JOIN n Type_Navire WHERE b.Id_Partie != $id_partie AND b.Id_Joueur = $id_joueur AND b.Type_Navire = 3";
+
+		$result = $connexion->query($sql) or die("echec critique2 <br/>".mysqli_error());
+
+		if($result == FALSE) // échec si FALSE
+		{
+			echo "Échec de la requête6 <br/>";
+		}
+
+		$data = mysqli_fetch_assoc($result) //Découpage du résultat
+		$Nb_cases_3 = 0;
+		$X_3 = $data['X'];
+		$Y_3 = $data['Y'];
+		$Orientation_3 = $data['Orientation'];
+
+		//Torpilleur
+		$sql = "SELECT b.Coord_X AS X, b.Coord_Y AS Y, b.Bool_Orientation AS Orientation FROM b Bateau NATURAL JOIN n Type_Navire WHERE b.Id_Partie != $id_partie AND b.Id_Joueur = $id_joueur AND b.Type_Navire = 4";
+
+		$result = $connexion->query($sql) or die("echec critique2 <br/>".mysqli_error());
+
+		if($result == FALSE) // échec si FALSE
+		{
+			echo "Échec de la requête6 <br/>";
+		}
+
+		$data = mysqli_fetch_assoc($result) //Découpage du résultat
+		$Nb_cases_4 = 0;
+		$X_4 = $data['X'];
+		$Y_4 = $data['Y'];
+		$Orientation_4 = $data['Orientation'];
+		
+		
 		echo "<table id=GrillePerso>";
 
 		for( $chiffre = 0; $chiffre <= 10; $chiffre++)
@@ -64,7 +136,6 @@
 						case 10 :
 							echo "<td id=CaseLeg>".J."</td>";
 							break;
-
 					}
 				}
 				else if($lettre == 0)
@@ -80,38 +151,6 @@
 		}
 
 		echo "</table>";
-
-
-		/*while($data = mysqli_fetch_assoc($result))
-		{
-			$pseudo_data = $data['Pseudo'];
-			$id_etat_data = $data['Id_Etat'];
-			$max_date_data = $data['Max_Date'];
-
-			echo '<tr id="contact">';
-			echo '   <td id="Pseudo_contact">'.$pseudo_data.'</td>';
-
-			//fonction test d'inactivité #DemanderAPapa
-			echo '   <td id="contact-online" ></td>';
-			//echo '   <td id="contact-offline" ></td>';
-			echo '</tr>';
-			echo '<tr>';
-			echo '   <td id="contact_last_game">';
-			if ($id_etat_data == 0)
-			{
-				echo "Partie en cours, débutée le ".$max_date_data;
-			}
-			else if ($id_etat_data == 1)
-			{
-				echo "En Attente depuis le ".$max_date_data;
-			}
-			else
-			{
-				echo "Aucune partie, dernière commencée le ".$max_date_data;
-			}
-			echo '   </td>';
-			echo '</tr>';
-		}*/
 	}
 
 
