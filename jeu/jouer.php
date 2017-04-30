@@ -55,5 +55,45 @@
 						?>
 			</table>
 		</div>
+
+		<?php
+			if(isset($_POST['pseudoAdversaire'])){//On stocke certaines variables en session
+				$_SESSION['pseudo_adversaire'] = $_POST['pseudoAdversaire'];
+				$pseudo_adversaire = $_SESSION['pseudo_adversaire']; //copie
+
+				$sql = "SELECT Id_Joueur FROM Joueur WHERE Pseudo = '$pseudo_adversaire'";
+				$resultat = mysqli_query($connexion, $sql);
+				$resultat_array = mysqli_fetch_assoc($resultat);
+				$id_adversaire = $resultat_array["Id_Joueur"];
+				$_SESSION["id_adversaire"] = $id_adversaire; //On stocke en session
+
+				$sql2 = "SELECT Id_Partie, Id_Etat FROM Partie WHERE (Id_Initiateur = $id_invitant AND Id_Invite = $id_adversaire) OR (Id_Initiateur = $id_adversaire AND Id_Invite = $id_invitant)";
+				$resultat2 = $connexion->query($sql2);
+				$resultat_array2 = mysqli_fetch_assoc($resultat2);
+				$id_partie2 = $resultat_array2["Id_Partie"];
+				$id_etat_partie = $resultat_array2["Id_Etat"];
+				$_SESSION["id_partie"] = $id_partie2;
+				echo $id_partie2 . " ";
+				echo $id_etat_partie;
+
+				if($id_etat_partie == 0){
+					header("Location: partie.php");
+				}else if ($id_etat_partie == 1){
+					//Si la partie est en attente, on regarde si l'utilisateur est l'invité. Si oui, on lance la partie
+					$sql3 = "SELECT Id_Invite FROM Partie WHERE Id_Intiateur = $id_adversaire AND Id_Etat = 1";
+					$resultat3 = $connexion->query($sql3);
+					if ($resultat3->num_rows === 0){
+						echo "Vous avez invité $pseudo_adversaire, mais il n'a pas encore répondu...";
+					}else{
+						//On démarre leur partie
+						$sql4 = "UPDATE Partie SET Id_Etat = 0 WHERE Partie.Id_Partie = $id_partie2";
+						$resultat4 = mysqli_query($connexion, $sql4);
+						if ($resultat4){
+							header("Location: partie.php");
+						}else{echo "Error: " . $sql . "<br>" . $connexion->error;}
+					}
+				}
+			}
+		?>
 	</body>
 </html>
