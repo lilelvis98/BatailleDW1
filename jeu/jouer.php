@@ -46,5 +46,14 @@
 					</div>
 				</form>
 		</div>
+		<div id= "boiteparties">
+			<table id="tab_parties">
+						<th id="th_partie">Parties</th>
+						<tr id="marge_avant_contacts"></tr>
+						<?php
+							get_parties_joueur(); 
+						?>
+			</table>
+		</div>
 	</body>
 </html>
