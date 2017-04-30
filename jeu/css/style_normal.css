@@ -49,6 +49,24 @@ h1{
 	margin-right: auto;
 }
 
+#boiteinvitation{
+	background-color: #ffe680;
+ 	width: 40%;
+ 	border: 16px solid #ffcc66;
+ 	padding: 20px;
+	float: left;
+	text-align: center;
+}
+
+#boiteparties{
+	background-color: #ffe680;
+ 	width: 40%;
+ 	border: 16px solid #ffcc66;
+ 	padding: 20px;
+	float: right;
+	text-align: center;
+}
+
 #BateauPlace
 {
 	
@@ -118,6 +136,13 @@ h1{
 	margin-right: 7%;
 }
 
+#tab_parties
+{	
+	margin-left: auto;
+	margin-top: 20px;
+	margin-right: auto;
+}
+
 #th_contact
 {
 	padding-bottom: 5px;
@@ -180,13 +205,10 @@ input.inscription {
 	color: red;
 }
 
-input.pseudoadv {
-	
-}
-
 input[type=password]:focus {
     border: 2px solid #555;
 }
+
 #GrillePerso
 {
 	border-collapse: 2px solid blue;
