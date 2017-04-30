@@ -20,7 +20,7 @@
 			<p>Invitez un Joueur en entrant son Pseudo</p>
 			<form method='POST' action='./jouer.php'>
 					<p>
-						<input id="pseudoInv" name="pseudoInvitation" type="text" placeholder="Pseudo" />
+						<input id="pseudoInv" name="pseudoInvitation" type="text" placeholder="Pseudo" maxlength=15/>
 					</p>
 					<p>
 						<input id="clicinv" name="cliqueinvitation" type="submit" value="Inviter" class="invitation">

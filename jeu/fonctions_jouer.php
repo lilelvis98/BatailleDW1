@@ -86,7 +86,7 @@
 				echo '<tr id="contact">';
 				echo '   <td id="Pseudo_contact">'.$pseudo_adversaire.'</td>';
 
-				echo '   <td id="contact-online" ></td>';
+				echo "   <td><form method='POST' action='./partie.php'> <input id='clicpa' name='cliquepartie' type='submit' value=$pseudo_adversaire placeholder='Jouer' class='reprendrepartie'></form></td>";
 				echo '</tr>';
 				echo '<tr>';
 				echo '   <td id="contact_last_game">';

@@ -95,9 +95,9 @@ h1{
 
 #tab_parties
 {	
-	width: auto;
+	margin-left: auto;
 	margin-top: 20px;
-	margin-right: 7%;
+	margin-right: auto;
 }
 
 #th_contact
