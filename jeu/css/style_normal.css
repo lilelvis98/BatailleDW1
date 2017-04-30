@@ -50,18 +50,18 @@ h1{
 }
 
 #boiteinvitation{
-	background-color: #ffe680;
+	background-color: #c6d9ec;
  	width: 40%;
- 	border: 16px solid #ffcc66;
+ 	border: 16px solid #2d5986;
  	padding: 20px;
 	float: left;
 	text-align: center;
 }
 
 #boiteparties{
-	background-color: #ffe680;
+	background-color: #c6d9ec;
  	width: 40%;
- 	border: 16px solid #ffcc66;
+ 	border: 16px solid #2d5986;
  	padding: 20px;
 	float: right;
 	text-align: center;
@@ -207,6 +207,14 @@ input.inscription {
 
 input[type=password]:focus {
     border: 2px solid #555;
+}
+
+input[id=pseudoadv]{
+	background-color: #003d99;
+	color: white;
+	text-align: center;
+	font-weight: bold;
+	border-color: #003d99;
 }
 
 #GrillePerso
