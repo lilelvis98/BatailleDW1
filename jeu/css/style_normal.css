@@ -28,27 +28,52 @@ h1{
 	margin-right: auto;
 }
 
-#boiteinvitation{
-	background-color: #ffe680;
- 	width: 40%;
- 	border: 16px solid #ffcc66;
- 	padding: 20px;
-	float: left;
-	text-align: center;
-}
-
-#boiteparties{
-	background-color: #ffe680;
- 	width: 40%;
- 	border: 16px solid #ffcc66;
- 	padding: 20px;
-	float: right;
-	text-align: center;
-}
-
 #boiteinscription2{
 	background-color: #c6d9ec;
  	width: 300px;
+ 	border: 12px solid #2d5986;
+ 	padding: 20px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+#boiteconsignes{
+	position: fixed;
+	float: left;
+	background-color: #c6d9ec;
+	font-weight: bold;
+ 	width: 300px;
+ 	border: 12px solid #2d5986;
+ 	padding: 20px;
+	margin-left: 3%;
+	margin-right: auto;
+}
+
+#BateauPlace
+{
+	
+}
+
+#BateauPasPlace
+{
+	
+}
+
+#boitecarte{
+	float: right;
+	background-color: #c6d9ec;
+ 	width: 300px;
+ 	border: 12px solid #2d5986;
+ 	padding: 20px;
+	margin-left: auto;
+	margin-right: 3%;
+}
+
+#boitegrilles{
+	float: center;
+	background-color: #c6d9ec;
+ 	width: 600px;
+	height: 600px;
  	border: 12px solid #2d5986;
  	padding: 20px;
 	margin-left: auto;
@@ -93,27 +118,11 @@ h1{
 	margin-right: 7%;
 }
 
-#tab_parties
-{	
-	margin-left: auto;
-	margin-top: 20px;
-	margin-right: auto;
-}
-
 #th_contact
 {
 	padding-bottom: 5px;
 	text-align: left;
 	color: #002966;
-	font-size: 20px;
-	border-bottom: 2px solid #002966;
-}
-
-#th_partie
-{
-	padding-bottom: 5px;
-	text-align: center;
-	color: #002965;
 	font-size: 20px;
 	border-bottom: 2px solid #002966;
 }
@@ -166,18 +175,30 @@ input.inscription {
 	background-color: #0099ff;
 }
 
-input.invitation {
-	width: 20%;
-	color: #ffffff;
-	height: 30px;
-	background-color: #cc6600;
-}
-
-input[type=password]:focus {
-    border: 2px solid #555;
-}
-
 #erreur {
 	font-size:70%;
 	color: red;
+}
+
+#GrillePerso
+{
+	border-collapse: 2px solid blue;
+}
+
+#CaseLeg
+{
+	background-color: #142a39;
+	color: white;
+	//font-weight: bold;
+	font-size: 25px;
+	text-align: center;
+	width: 50px;
+	height: 50px;
+}
+
+#CaseEau
+{
+	background-color: #0a4976;
+	width: 47px;
+	height: 47px;
 }
