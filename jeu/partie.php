@@ -22,7 +22,7 @@
 						<label><input type="radio" name="orientation" id="V" value="vertical" <?php if( $_POST["orientation"] == "vertical") { echo "CHECKED"; } ?>> Vertical</label> <br/>
 
 				<br/>
-						<label><input type="radio" name="bateau" id="1" value="Porte-avion" <?php if( $_POST["bateau"] == "Porte_avion") { echo "CHECKED"; } ?>>Porte-avion</label> <br/>
+						<label><input type="radio" name="bateau" id="1" value="Porte-avion" <?php if( $_POST["bateau"] == "Porte-avion") { echo "CHECKED"; } ?>>Porte-avion</label> <br/>
 						<label><input type="radio" name="bateau" id="1" value="Croiseur" <?php if( $_POST["bateau"] == "Croiseur") { echo "CHECKED"; } ?>>Croiseur</label> <br/>
 						<label><input type="radio" name="bateau" id="1" value="Contre-torpilleur" <?php if( $_POST["bateau"] == "Contre-torpilleur") { echo "CHECKED"; } ?>>Contre-torpilleur</label> <br/>
 						<label><input type="radio" name="bateau" id="1" value="Sous-marin" <?php if( $_POST["bateau"] == "Sous-marin") { echo "CHECKED"; } ?>>Sous-marin</label> <br/>
