@@ -84,9 +84,9 @@
 				$pseudo_adversaire = $data2['Pseudo'];
 
 				echo '<tr id="contact">';
-				echo '   <td id="Pseudo_contact">'.$pseudo_adversaire.'</td>';
+				echo "   <td id='Pseudo_contact'><form method='POST' action='./jouer.php'>"."<input id='pseudoadv' name='pseudoAdversaire' type='text' value='$pseudo_adversaire' readonly/>"."</td>";
 
-				echo "   <td><form method='POST' action='./partie.php'> <input id='clicpa' name='cliquepartie' type='submit' value=$pseudo_adversaire placeholder='Jouer' class='reprendrepartie'></form></td>";
+				echo "   <td> <input id='clicpa' name='cliquepartie' type='submit' value='Jouer' class='reprendrepartie'></form></td>";
 				echo '</tr>';
 				echo '<tr>';
 				echo '   <td id="contact_last_game">';
