@@ -37,7 +37,10 @@
 				Ceci sont des cartes métales
 			</div>
 			<div id="boitegrilles"> <!-- div de la grille perso -->
-				<?php getGrillePerso(); ?>
+				<?php 
+					CreationGrillePerso(); 
+					GrillePersoHTML();
+				?>
 			</div>
 			<br/>
 			<div id="boitegrilles"> <!-- div de la grille ennemie -->
