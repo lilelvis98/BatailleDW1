@@ -39,7 +39,7 @@
 				else{
 					//On invite l'autre joueur...
 
-					//On commence par trouver le plus grand id de partie et y ajouter 1 -de façon similaire à l'inscription d'un joueur
+					//On commence par trouver le plus grand id de partie et y ajouter 1 --de façon similaire à l'inscription d'un joueur--
 					$sql = "SELECT MAX(Id_Partie) AS id FROM Partie";
 					$resultat = mysqli_query($connexion, $sql);
 					$id_partie_arr = mysqli_fetch_assoc($resultat);
@@ -55,7 +55,42 @@
 					if ($resultat) {
 						$invitation_correcte = true;
 					} else {
-					echo "Error: " . $sql . "<br>" . $connexion->error;
+						echo "Error: " . $sql . "<br>" . $connexion->error;
+					}
+
+					//On récupère le plus haut Id de Bateau... pareil que pour la partie
+					$sql_id = "SELECT MAX(Id_Bateau) AS id FROM Bateau";
+					$resultat = mysqli_query($connexion, $sql_id);
+					$max_id_bateau_arr = mysqli_fetch_assoc($resultat);
+					$max_id_bateau = $max_id_bateau_arr["id"];
+
+					if ($max_id_bateau === null){$max_id_bateaue = 1;}
+					else{$max_id_bateau++;}
+
+					//On crée les bateaux de l'invitant
+					for ($num_bateau = 0; $num_bateau <= 4; $num_bateau++) {
+    					$sql_bateau = "INSERT INTO Bateau (Id_Bateau, Id_Partie, Id_Joueur, Id_Type_Navire, Coord_Y, Coord_X, Bool_Orientation, Bool_Etat) VALUES ($max_id_bateau, $id_partie, $id_invitant, $num_bateau, NULL, NULL, NULL, 0)";
+
+						$resultat_bateau = mysqli_query($connexion, $sql_bateau);
+						if (!$resultat_bateau) {
+							echo "Error: " . $sql . "<br>" . $connexion->error;
+						}
+
+						$max_id_bateau++;
+					}
+
+					$max_id_bateau++;
+
+					//On crée les bateaux de l'invité
+					for ($num_bateau = 0; $num_bateau <= 4; $num_bateau++) {
+    					$sql_bateau = "INSERT INTO Bateau (Id_Bateau, Id_Partie, Id_Joueur, Id_Type_Navire, Coord_Y, Coord_X, Bool_Orientation, Bool_Etat) VALUES ($max_id_bateau, $id_partie, $id_invite, $num_bateau, NULL, NULL, NULL, 0)";
+
+						$resultat_bateau = mysqli_query($connexion, $sql_bateau);
+						if (!$resultat_bateau) {
+							echo "Error: " . $sql . "<br>" . $connexion->error;
+						}
+
+						$max_id_bateau++;
 					}
 				}
 			}
