@@ -51,6 +51,11 @@
 		}
 	}
 
+	function AjouterBateau($bateau, $orientation, $lettre, $chiffre)
+	{
+		
+	}
+
 
 	function GrillePersoHTML()
 	{
@@ -63,6 +68,8 @@
 
 			for( $lettre = 0; $lettre <= 10; $lettre++)
 			{
+				$case=($chiffre - 1)*10 + $lettre;
+
 				if($chiffre == 0 && $lettre == 0)
 				{
 					echo "<td></td>";
@@ -72,34 +79,34 @@
 					switch ($lettre)
 					{
 						case 1 :
-							echo "<td id=CaseLeg>".A."</td>";
+							echo "<td id=CaseLeg>A</td>";
 							break;
 						case 2 :
-							echo "<td id=CaseLeg>".B."</td>";
+							echo "<td id=CaseLeg>B</td>";
 							break;
 						case 3 :
-							echo "<td id=CaseLeg>".C."</td>";
+							echo "<td id=CaseLeg>C</td>";
 							break;
 						case 4 :
-							echo "<td id=CaseLeg>".D."</td>";
+							echo "<td id=CaseLeg>D</td>";
 							break;
 						case 5 :
-							echo "<td id=CaseLeg>".E."</td>";
+							echo "<td id=CaseLeg>E</td>";
 							break;
 						case 6 :
-							echo "<td id=CaseLeg>".F."</td>";
+							echo "<td id=CaseLeg>F</td>";
 							break;
 						case 7 :
-							echo "<td id=CaseLeg>".G."</td>";
+							echo "<td id=CaseLeg>G</td>";
 							break;
 						case 8 :
-							echo "<td id=CaseLeg>".H."</td>";
+							echo "<td id=CaseLeg>H</td>";
 							break;
 						case 9 :
-							echo "<td id=CaseLeg>".I."</td>";
+							echo "<td id=CaseLeg>I</td>";
 							break;
 						case 10 :
-							echo "<td id=CaseLeg>".J."</td>";
+							echo "<td id=CaseLeg>J</td>";
 							break;
 					}
 				}
@@ -107,12 +114,12 @@
 				{
 					echo "<td id=CaseLeg>".$chiffre."</td>";
 				}
-				else if ($grille[($chiffre - 1)*10 + $lettre] != 0)
+				else if ($grille[$case] != 0)
 				{
-					echo "<td id=CaseBateau>".$grille[($chiffre - 1)*10 + $lettre]."</td>";
+					echo "<td id=CaseBateau>".$grille[$case]."</td>";
 				}
 				else
-				{
+				{				
 					echo "<td id=CaseEau></td>";
 				}
 			}
@@ -125,3 +132,5 @@
 
 
 ?>
+
+
