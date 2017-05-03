@@ -67,6 +67,17 @@ h1{
 	text-align: center;
 }
 
+#boitestatistiques{
+	background-color: #c6d9ec;
+ 	width: 50%;
+ 	border: 16px solid #2d5986;
+ 	padding: 30px;
+	font-size: 120%
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
+}
+
 #BateauPlace
 {
 	
