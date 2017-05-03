@@ -14,11 +14,11 @@
 			require_once('./fonctions.php');
 			require_once('./fonctions_partie.php');
 		?>
-		<h1>A l'abordage <?php echo $_SESSION['pseudo_joueur']; ?> !</h1><br/>
+		<h1>Il est temps choisir vos meilleurs marins Capitaine <?php echo $_SESSION['pseudo_joueur']; ?> !</h1><br/>
 		<div id="boutons_accueil">
 			<div id="boiteconsignes"> <!-- div d'action (placement des bâteaux/pioche des cartes etc...) -->
 				<form method='POST' action='./partie.php'>
-						Il est temps de placer votre flotte position ! <br/> <br/> <br/>
+						Choisissez la position de votre flotte, tous les bateau doivent être placés :<br/> <br/> <br/>
 
 						<select name="lettre">
 						  <option value="1">A</option>
