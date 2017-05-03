@@ -14,11 +14,11 @@
 			require_once('./fonctions.php');
 			require_once('./fonctions_partie.php');
 		?>
-		<h1><?php echo $_SESSION['pseudo_joueur']; ?> vous attaque, aux abris moussaillon !</h1><br/>
+		<h1>A l'abordage <?php echo $_SESSION['pseudo_joueur']; ?> !</h1><br/>
 		<div id="boutons_accueil">
 			<div id="boiteconsignes"> <!-- div d'action (placement des bâteaux/pioche des cartes etc...) -->
 				<form method='POST' action='./partie.php'>
-						Il est temps de mettre en flotte en position ! <br/> <br/> <br/>
+						Il est temps de placer votre flotte position ! <br/> <br/> <br/>
 
 						<select name="lettre">
 						  <option value="1">A</option>
@@ -48,8 +48,8 @@
 <br/>
 <br/>
 
-						<label><input type="radio" name="orientation" id="H" value="horizontal" <?php if( $_POST["orientation"] == "horizontal") { echo "CHECKED"; } ?>> Horizontal</label> <br/>
-						<label><input type="radio" name="orientation" id="V" value="vertical" <?php if( $_POST["orientation"] == "vertical") { echo "CHECKED"; } ?>> Vertical</label> <br/>
+						<label><input type="radio" name="orientation" id="H" value="1" <?php if( $_POST["orientation"] == "1") { echo "CHECKED"; } ?>> Horizontal</label> <br/>
+						<label><input type="radio" name="orientation" id="V" value="0" <?php if( $_POST["orientation"] == "0") { echo "CHECKED"; } ?>> Vertical</label> <br/>
 
 				<br/>
 						<label><input type="radio" name="bateau" id="1" value="0" <?php if( $_POST["bateau"] == "0") { echo "CHECKED"; } ?>>Porte-avion</label> <br/>
@@ -63,17 +63,19 @@
 						<input id="cliva" name="cliquevalider" type="Submit" value="Placer le navire"/>
 				</form>
 		        <br/>
-				<?php if($_POST['bateau'] != null) echo "Placement d'un ".$_POST["bateau"]." ".$_POST["orientation"]." en : ".$_POST["lettre"].$_POST["chiffre"]; ?>
-				<?php  
-					if (isset($_POST['bateau']) && isset($_POST['orientation'])
+				<?php 
+
+					if (isset($_POST['bateau']) and isset($_POST['orientation']))
 					{
 						AjouterBateau($_POST["bateau"], $_POST["orientation"], $_POST["lettre"], $_POST["chiffre"]);
 					}
  				?>
 			</div>
 			<div id="boitecarte"> <!-- div des dernières cartes jouées -->
-				<?php $data_array = $_GET['case[0]'];
-						echo $data_array; ?>
+				<form method='POST' action='./partie.php'>
+					<input id="valider_pos" name="cliquevalider" type="Submit" value="Valider les positions"/>
+				</form>
+				<?php if($_POST['cliquevalider'] == "Valider les positions") echo "ok"; ?>
 			</div>
 			<div id="boitegrilles"> <!-- div de la grille perso -->
 				<?php 

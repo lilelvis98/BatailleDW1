@@ -22,7 +22,7 @@
 		
 		for ( $i = 1; $i <= 5; $i++)
 		{
-			$sql = "SELECT n.Nb_Cases AS Nb_Cases, b.Coord_X AS X, b.Coord_Y AS Y, b.Bool_Orientation AS Orientation FROM Bateau b NATURAL JOIN Type_Navire n WHERE b.Id_Partie != $id_partie AND b.Id_Joueur = $id_joueur AND b.Id_Type_Navire = ($i - 1)";
+			$sql = "SELECT n.Nb_Cases AS Nb_Cases, b.Coord_X AS X, b.Coord_Y AS Y, b.Bool_Orientation AS Orientation FROM Bateau b NATURAL JOIN Type_Navire n WHERE b.Id_Partie = $id_partie AND b.Id_Joueur = $id_joueur AND b.Id_Type_Navire = ($i - 1)";
 
 			$result = $connexion->query($sql) or die("echec critique2 <br/>".mysqli_error());
 
@@ -53,7 +53,20 @@
 
 	function AjouterBateau($bateau, $orientation, $lettre, $chiffre)
 	{
-		
+		global $id_joueur;
+		global $connexion;
+		global $id_partie;
+
+		$sql = "UPDATE Bateau SET Coord_X = $lettre, Coord_Y = $chiffre,  Bool_Orientation = $orientation WHERE Id_Joueur = $id_joueur AND Id_Partie = $id_partie AND Id_Type_Navire = $bateau";
+		$resultat = mysqli_query($connexion, $sql);
+		if ($resultat == FALSE)
+		{
+			echo "Dommage Fromage";
+		}
+		else
+		{
+			echo $sql;
+		}
 	}
 
 
