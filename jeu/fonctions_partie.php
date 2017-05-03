@@ -38,7 +38,11 @@
 			$Orientation = $data['Orientation'];
 			for ($Nb_cases = $data['Nb_Cases']; $Nb_cases != 0; $Nb_cases--)
 			{
-				$grille[($Y - 1)*10 + $X]=$i;
+				if($X != NULL)
+				{
+					$grille[($Y - 1)*10 + $X]=$i;
+				}
+
 				if ($Orientation == true)
 				{
 					$X++;
@@ -61,13 +65,60 @@
 		$resultat = mysqli_query($connexion, $sql);
 		if ($resultat == FALSE)
 		{
-			echo "Dommage Fromage";
+			echo "Erreur : Impossible de faire cette requête : ".$sql;
+		}
+	}
+
+	function GrilleValidable()
+	{
+		global $grille;
+
+		$nb_1 = 5;
+		$nb_2 = 4;
+		$nb_3 = 3;
+		$nb_4 = 3;
+		$nb_5 = 2;
+		
+		for( $chiffre = 1; $chiffre <= 10; $chiffre++)
+		{
+			for( $lettre = 1; $lettre <= 10; $lettre++)
+			{
+				$case=($chiffre - 1)*10 + $lettre;
+				switch ($grille[$case])
+				{
+					case 1 :
+						$nb_1--;
+						break;
+
+					case 2 :
+						$nb_2--;
+						break;
+
+					case 3 :
+						$nb_3--;
+						break;
+
+					case 4 :
+						$nb_4--;
+						break;
+
+					case 5 :
+						$nb_5--;
+						break;
+				}
+			}
+		}
+
+		if($nb_1 == 0 && $nb_2 == 0 && $nb_3 == 0 && $nb_4 == 0 && $nb_5 == 0)
+		{
+			echo "<br/><br/>Votre formation est correcte moussaillon !";
 		}
 		else
 		{
-			echo $sql;
+			echo "<br/><br/>Votre formation n'est pas correcte moussaillon !";
 		}
 	}
+
 
 
 	function GrillePersoHTML()

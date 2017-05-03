@@ -75,11 +75,17 @@
 				<form method='POST' action='./partie.php'>
 					<input id="valider_pos" name="cliquevalider" type="Submit" value="Valider les positions"/>
 				</form>
-				<?php if($_POST['cliquevalider'] == "Valider les positions") echo "ok"; ?>
+				<?php 
+					CreationGrillePerso(); 
+					if($_POST['cliquevalider'] == "Valider les positions")
+					{
+						GrilleValidable();
+					}
+				?>
 			</div>
 			<div id="boitegrilles"> <!-- div de la grille perso -->
 				<?php 
-					CreationGrillePerso(); 
+					
 					GrillePersoHTML();
 				?>
 			</div>

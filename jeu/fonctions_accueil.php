@@ -35,7 +35,7 @@
 			{
 				echo "Partie en cours, débutée le ".$max_date_data;
 			}
-			else if ($id_etat_data == 1)
+			else if ($id_etat_data == 1 or $id_etat_data == 1)
 			{
 				echo "En Attente depuis le ".$max_date_data;
 			}
