@@ -34,7 +34,7 @@
 		}
 		$parties_perdues = $parties_jouees - $parties_gagnees;
 
-		echo "Parties perdues : " . $parties_perdues . "<br /><br />";
+		echo "Parties Perdues : " . $parties_perdues . "<br /><br />";
 		echo "Pourcentage de victoire : " . $pourcentage_victoires . "<br /><br />";
 	}
 

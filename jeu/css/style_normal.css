@@ -73,9 +73,11 @@ h1{
  	border: 16px solid #2d5986;
  	padding: 30px;
 	font-size: 120%
+	font-weight: bold;
 	margin-left: auto;
 	margin-right: auto;
 	text-align: center;
+	font-variant: small-caps;
 }
 
 #BateauPlace
