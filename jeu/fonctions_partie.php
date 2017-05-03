@@ -2,6 +2,7 @@
 	$id_joueur = $_SESSION["id_joueur"];
 	$id_partie = $_SESSION["id_partie"];
 	$connexion = $_SESSION['connexion'];
+	$partie_2 = false;
 	$grille = array("0","0","0","0","0","0","0","0","0","0",
 					"0","0","0","0","0","0","0","0","0","0",
 					"0","0","0","0","0","0","0","0","0","0",
@@ -12,6 +13,7 @@
 					"0","0","0","0","0","0","0","0","0","0",
 					"0","0","0","0","0","0","0","0","0","0",
 					"0","0","0","0","0","0","0","0","0","0");
+
 
 	function CreationGrilleperso()
 	{
@@ -72,6 +74,9 @@
 	function GrilleValidable()
 	{
 		global $grille;
+		global $partie_2;
+		global $connexion;
+		global $id_partie;
 
 		$nb_1 = 5;
 		$nb_2 = 4;
@@ -111,7 +116,16 @@
 
 		if($nb_1 == 0 && $nb_2 == 0 && $nb_3 == 0 && $nb_4 == 0 && $nb_5 == 0)
 		{
-			echo "<br/><br/>Votre formation est correcte moussaillon !";
+			$sql = "UPDATE Partie SET Id_Etat = 2 WHERE Id_Partie = $id_partie";
+			$resultat = mysqli_query($connexion, $sql);
+			if ($resultat == FALSE)
+			{
+				echo "Erreur : Impossible de continuer la partie : ".$sql;
+			}
+			else
+			{
+				$partie_2 = true;
+			}
 		}
 		else
 		{

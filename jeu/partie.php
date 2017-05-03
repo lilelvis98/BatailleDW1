@@ -52,11 +52,11 @@
 						<label><input type="radio" name="orientation" id="V" value="0" <?php if( $_POST["orientation"] == "0") { echo "CHECKED"; } ?>> Vertical</label> <br/>
 
 				<br/>
-						<label><input type="radio" name="bateau" id="1" value="0" <?php if( $_POST["bateau"] == "0") { echo "CHECKED"; } ?>>Porte-avion</label> <br/>
-						<label><input type="radio" name="bateau" id="1" value="1" <?php if( $_POST["bateau"] == "1") { echo "CHECKED"; } ?>>Croiseur</label> <br/>
-						<label><input type="radio" name="bateau" id="1" value="2" <?php if( $_POST["bateau"] == "2") { echo "CHECKED"; } ?>>Contre-torpilleur</label> <br/>
-						<label><input type="radio" name="bateau" id="1" value="3" <?php if( $_POST["bateau"] == "3") { echo "CHECKED"; } ?>>Sous-marin</label> <br/>
-						<label><input type="radio" name="bateau" id="1" value="4" <?php if( $_POST["bateau"] == "4") { echo "CHECKED"; } ?>>Torpilleur</label> <br/>
+						<label><input type="radio" name="bateau" id="1" value="0" <?php if( $_POST["bateau"] == "0") { echo "CHECKED"; } ?>> [1] Porte-avion</label> <br/>
+						<label><input type="radio" name="bateau" id="1" value="1" <?php if( $_POST["bateau"] == "1") { echo "CHECKED"; } ?>> [2] Croiseur</label> <br/>
+						<label><input type="radio" name="bateau" id="1" value="2" <?php if( $_POST["bateau"] == "2") { echo "CHECKED"; } ?>> [3] Contre-torpilleur</label> <br/>
+						<label><input type="radio" name="bateau" id="1" value="3" <?php if( $_POST["bateau"] == "3") { echo "CHECKED"; } ?>> [4] Sous-marin</label> <br/>
+						<label><input type="radio" name="bateau" id="1" value="4" <?php if( $_POST["bateau"] == "4") { echo "CHECKED"; } ?>> [5] Torpilleur</label> <br/>
 				<br/>
 				<br/>
 				<br/>
@@ -81,7 +81,14 @@
 					{
 						GrilleValidable();
 					}
+
+					if ($partie_2)
+					{					
+						header("Location: ./partie2.php");
+					}
+
 				?>
+					
 			</div>
 			<div id="boitegrilles"> <!-- div de la grille perso -->
 				<?php 
@@ -89,10 +96,10 @@
 					GrillePersoHTML();
 				?>
 			</div>
-			<br/>
-			<div id="boitegrilles"> <!-- div de la grille ennemie -->
+			<!--<br/>
+			<div id="boitegrilles">
 				<?php getGrilleEnnemie(); ?>
-			</div>
+			</div> -->
 		</div>
 	</body>
 </html>
