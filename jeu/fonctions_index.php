@@ -46,5 +46,23 @@
 			$erreur_connexion = true;
 		}
 	}
+
+	function deconnexion_site(){
+		global $connexion;
+		$id_j = $_SESSION['id_joueur'];
+		
+		//On déconnecte l'utilisateur dans la BD
+		$sql_deco = "UPDATE Joueur SET Online = 0 WHERE Id_Joueur = $id_j";
+		$resultat_deco = mysqli_query($connexion, $sql_deco);
+		if (!$resultat_deco){echo "Déconnexion échouée :(";}
+		else{echo "Déconnexion réussie...";}
+
+		//On vide les variables en session...
+		$_SESSION['id_joueur'] = null;
+		$_SESSION['pseudo_joueur'] = null;
+		$_SESSION['id_adversaire'] = null;
+		$_SESSION['id_partie'] = null;
+
+	}
 ?>
 

@@ -54,8 +54,8 @@ session_start(); ?>
 		</div>
 
 		<!-- Formulaire d'inscription -->
-		<div id="boiteinscription">
-			<div id="centrer">
+		<div id="centrer">
+			<div id="boiteinscription">
 				<p>
 					<form method='POST' action='./inscription.php'>
 						<p>
@@ -63,6 +63,14 @@ session_start(); ?>
 						</p>
 					</form>
 				</p>
+			</div>
+
+			<div id="erreur">
+				<?php 
+					if(isset($_POST["cliqueDeconnexion"])){
+						deconnexion_site();
+					}
+				?>
 			</div>
 		</div>
 	</body>
