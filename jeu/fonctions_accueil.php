@@ -8,7 +8,7 @@
 		global $id_joueur;
 		global $connexion;
 		
-		$sql = "SELECT j.Online AS online, j.Pseudo AS Pseudo , Max(p.Date_Creation) AS Max_Date, p.Id_Etat AS Id_Etat FROM Joueur j JOIN Partie p ON j.Id_Joueur = p.Id_Initiateur OR j.Id_Joueur = p.Id_Invite WHERE j.Id_Joueur != $id_joueur AND (p.Id_Invite = $id_joueur OR p.Id_Initiateur = $id_joueur) GROUP BY p.Id_Etat, j.Pseudo, j.Online ORDER BY p.Id_Etat";
+		$sql = "SELECT DISTINCT j.Online AS online, j.Pseudo AS Pseudo , Max(p.Date_Creation) AS Max_Date, p.Id_Etat AS Id_Etat FROM Joueur j JOIN Partie p ON j.Id_Joueur = p.Id_Initiateur OR j.Id_Joueur = p.Id_Invite WHERE j.Id_Joueur != $id_joueur AND (p.Id_Invite = $id_joueur OR p.Id_Initiateur = $id_joueur) GROUP BY p.Id_Etat, j.Pseudo, j.Online ORDER BY p.Id_Etat";
 
 		$result = $connexion->query($sql) or die("echec critique2 <br/>".mysqli_error());
 
@@ -38,7 +38,7 @@
 			echo '</tr>';
 			echo '<tr>';
 			echo '   <td id="contact_last_game">';
-			if ($id_etat_data == 2 or $id_etat_data == 1)
+			if ($id_etat_data == 1 or $id_etat_data == 3)
 			{
 				echo "Partie en cours, débutée le ".$max_date_data;
 			}
