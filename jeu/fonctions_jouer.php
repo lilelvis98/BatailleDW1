@@ -102,7 +102,7 @@
 		$connexion = $_SESSION["connexion"];
 		global $id_invitant; //Assimilé à id_joueur
 
-		$sql = "SELECT Id_Invite AS id_j, Date_Creation, Id_Etat AS id_p FROM Partie WHERE Id_Initiateur = $id_invitant UNION SELECT Id_Initiateur AS id_j, Date_Creation, Id_Etat AS id_p FROM Partie WHERE Id_Invite = $id_invitant";
+		$sql = "SELECT Id_Invite AS id_j, Date_Creation, Id_Etat AS id_p FROM Partie WHERE (Id_Initiateur = $id_invitant AND Id_Etat <> 2) UNION SELECT Id_Initiateur AS id_j, Date_Creation, Id_Etat AS id_p FROM Partie WHERE (Id_Invite = $id_invitant AND Id_Etat <> 2)";
 		$resultat = $connexion->query($sql);
 		if (!($resultat->num_rows > 0)){
 			echo "Vous n'avez pas de partie en cours ! \nInvitez un Joueur pour en démarrer une.";
