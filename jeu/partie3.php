@@ -17,7 +17,7 @@ session_start(); ?>
 			require_once('./fonctions_accueil.php');
 		?>
 		<?php getadv(); ?>
-		<h1>Il semblerait que <?php echo $pseudo_adv; ?> n'ai pas encore constitué sa flotte<br/>Patience matelos !</h1>
+		<h1>Il semblerait que <?php echo $pseudo_adv; ?> n'ai pas encore constitué sa flotte<br/>Patience matelot !</h1>
 
 			<div id="boiteconsignes">
 				<form method='POST' action='./accueil.php'>

@@ -3,7 +3,7 @@
 	$id_joueur = $_SESSION["id_joueur"];
 	$id_partie = $_SESSION["id_partie"];
 	$connexion = $_SESSION['connexion'];
-	$partie_2 = false;
+	$pseudo_adv = "BarbeRousse";
 	$grilleperso = array("0","0","0","0","0","0","0","0","0","0",
 					"0","0","0","0","0","0","0","0","0","0",
 					"0","0","0","0","0","0","0","0","0","0",
@@ -273,7 +273,7 @@
 					echo "<td id=CaseEauTouche>T</td>";
 				}
 				else
-				{				
+				{
 					echo "<td id=CaseEauTouche></td>";
 				}
 			}
@@ -360,6 +360,90 @@
 		echo "</table>";
 	}
 
+	function getActionTour()
+	{
+		global $id_joueur;
+		global $connexion;
+		global $id_partie;
+		global $pseudo_adv;
+
+		$sql = "SELECT DISTINCT tou.Id_Joueur AS joueur FROM Tour tou NATURAL JOIN Tir ti WHERE tou.Id_Tour = (SELECT Max(Id_Tour) FROM Tour WHERE Id_Partie = $id_partie)";
+		$resultat = mysqli_query($connexion, $sql);
+		if ($resultat == FALSE)
+		{
+			echo "Erreur : Impossible de faire cette requête : ".$sql;
+		}
+		else
+		{
+			$data = mysqli_fetch_assoc($resultat);	
+			if ($data['joueur'] == $id_joueur)
+			{
+				echo '<div id="boiteTourPerso">
+					<form method="POST" action="./partie2.php">
+						Capitaine, quels sont vos ordres de tir ? <br/><br/>
+						<select name="lettre">
+						  <option value="1">A</option>
+						  <option value="2">B</option>
+						  <option value="3">C</option>
+						  <option value="4">D</option>
+						  <option value="5">E</option>
+						  <option value="6">F</option>
+						  <option value="7">G</option>
+						  <option value="8">H</option>
+						  <option value="9">I</option>
+						  <option value="10">J</option>
+						</select>
+						<select name="chiffre">
+						  <option value="1">1</option>
+						  <option value="2">2</option>
+						  <option value="3">3</option>
+						  <option value="4">4</option>
+						  <option value="5">5</option>
+						  <option value="6">6</option>
+						  <option value="7">7</option>
+						  <option value="8">8</option>
+						  <option value="9">9</option>
+						  <option value="10">10</option>
+						</select>
+						<br/>
+						<br/>
+						<input id="valider_tir" name="cliquevalider" type="Submit" value="Feu !!!"/>
+					</form>	
+				</div>';
+			}
+			else
+			{
+				echo '<div id="boiteTourAdv">
+						Tous aux abris, '.$pseudo_adv.' vous canarde !<br/><br/>
+						<form method=\'POST\' action=\'./accueil.php\'>
+							<input id="valider_pos" name="cliquevalider" type="Submit" value="Retourner à l\'accueil"/>
+						</form>
+					</div>';
+			}
+		}
+	}
+
+	function getadv()
+	{
+		global $connexion;
+		global $id_partie;
+		global $id_joueur;
+		global $pseudo_adv;
+
+		$sql = "SELECT j.Pseudo AS pseudo FROM Joueur j JOIN Partie p ON p.Id_Initiateur = j.Id_Joueur OR p.Id_Invite = j.Id_Joueur WHERE j.Id_Joueur != $id_joueur AND p.Id_Partie = $id_partie";
+		$result = $connexion->query($sql) or die("echec critique2 <br/>".mysqli_error());
+
+		$data = mysqli_fetch_assoc($result);
+
+		if($result == FALSE) // échec si FALSE
+		{
+			echo "Échec de la requête6 <br/>";
+		}
+		else
+		{
+			$pseudo_adv = $data['pseudo'];
+		}
+	}
 
 
 ?>
