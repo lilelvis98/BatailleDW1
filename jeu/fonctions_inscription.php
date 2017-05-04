@@ -1,4 +1,5 @@
 <?php
+	/*-----LOPEZ-ROSTAIN ROMAIN 11507001 VILLERMET QUENTIN 11507338-----*/
 	if ($_SESSION["erreur_inscription"] === null){
 		$erreur_inscription = "erreur -inconnue";
 	}

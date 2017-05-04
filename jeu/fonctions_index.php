@@ -1,4 +1,5 @@
 <?php
+	/*-----LOPEZ-ROSTAIN ROMAIN 11507001 VILLERMET QUENTIN 11507338-----*/
 	//Pseudo du Joueur connecté
 	$pseudo_joueur = null;
 

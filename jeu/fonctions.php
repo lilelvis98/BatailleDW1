@@ -1,4 +1,5 @@
 <?php
+	/*-----LOPEZ-ROSTAIN ROMAIN 11507001 VILLERMET QUENTIN 11507338-----*/
 	//Variable globale de connexion à la BD
 	$connexion = null;
 	//Pseudo du Joueur connecté

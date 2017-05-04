@@ -1,4 +1,5 @@
 <?php
+	/*-----LOPEZ-ROSTAIN ROMAIN 11507001 VILLERMET QUENTIN 11507338-----*/
 	//variables utilitaires pour inviter_joueur
 	$pseudo_incorrect = false;
 	$id_invitant = $_SESSION["id_joueur"];

@@ -1,4 +1,5 @@
-<?php session_start(); ?>
+<?php /*-----LOPEZ-ROSTAIN ROMAIN 11507001 VILLERMET QUENTIN 11507338-----*/
+session_start(); ?>
 
 <!DOCTYPE html>
 <html>

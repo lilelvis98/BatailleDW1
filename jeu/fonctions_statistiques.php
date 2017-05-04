@@ -1,5 +1,5 @@
 <?php
-	
+	/*-----LOPEZ-ROSTAIN ROMAIN 11507001 VILLERMET QUENTIN 11507338-----*/
 	//Fonction de récupération des stats
 	function get_statistiques(){
 		global $connexion;
