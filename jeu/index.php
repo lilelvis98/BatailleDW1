@@ -72,6 +72,9 @@ session_start(); ?>
 					}
 				?>
 		</div>
+		<div id="github_lien">
+			<a href="http://github.com/lilelvis98/BatailleDW1"><i class="fa fa-github"></i> GitHub</a>
+		</div>
 	</body>
 </html>
 

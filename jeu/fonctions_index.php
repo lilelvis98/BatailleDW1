@@ -55,7 +55,7 @@
 		$sql_deco = "UPDATE Joueur SET Online = 0 WHERE Id_Joueur = $id_j";
 		$resultat_deco = mysqli_query($connexion, $sql_deco);
 		if (!$resultat_deco){echo "Déconnexion échouée :(";}
-		else{echo "<i class='fa fa-database'></i>" . " Déconnexion réussie...";}
+		else{echo "<br/><i class='fa fa-database'></i>" . " Déconnexion réussie...";}
 
 		//On vide les variables en session...
 		$_SESSION['id_joueur'] = null;

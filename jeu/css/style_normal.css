@@ -181,6 +181,13 @@ h1{
 	border-radius: 6px;
 }
 
+#github_lien{
+	position:absolute;
+	bottom:3px;
+	left:20px;
+	color: black;
+}
+
 #tab_contacts
 {
 	float: right;	
