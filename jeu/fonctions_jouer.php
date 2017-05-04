@@ -65,12 +65,13 @@
 					$max_id_bateau_arr = mysqli_fetch_assoc($resultat);
 					$max_id_bateau = $max_id_bateau_arr["id"];
 
-					if ($max_id_bateau === null){$max_id_bateaue = 1;}
+					if ($max_id_bateau === null){$max_id_bateau = 1;}
 					else{$max_id_bateau++;}
 
 					//On crée les bateaux de l'invitant
 					for ($num_bateau = 0; $num_bateau <= 4; $num_bateau++) {
     					$sql_bateau = "INSERT INTO Bateau (Id_Bateau, Id_Partie, Id_Joueur, Id_Type_Navire, Coord_Y, Coord_X, Bool_Orientation, Bool_Etat) VALUES ($max_id_bateau, $id_partie, $id_invitant, $num_bateau, NULL, NULL, NULL, 0)";
+					echo $sql_bateau;
 
 						$resultat_bateau = mysqli_query($connexion, $sql_bateau);
 						if (!$resultat_bateau) {
