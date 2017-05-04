@@ -119,11 +119,12 @@
 		}
 
 		if($nb_1 == 0 && $nb_2 == 0 && $nb_3 == 0 && $nb_4 == 0 && $nb_5 == 0)
-		{
+		{			
 			$sql = "SELECT Id_Etat FROM Partie WHERE Id_Partie = $id_partie";
 			$Etat = mysqli_query($connexion, $sql);
+			$data = mysqli_fetch_assoc($result);
 
-			if($Etat == 0)
+			if($data['Id_Etat'] == 0)
 			{
 				$sql = "UPDATE Partie SET Id_Etat = 3 WHERE Id_Partie = $id_partie";
 				$resultat = mysqli_query($connexion, $sql);
@@ -134,9 +135,10 @@
 				else
 				{
 					$partie_3 = true;
+					echo "c'est bon";
 				}
 			}
-			else if($Etat == 3)
+			else if($data['Id_Etat'] == 3)
 			{
 				$sql = "UPDATE Partie SET Id_Etat = 4 WHERE Id_Partie = $id_partie";
 				$resultat = mysqli_query($connexion, $sql);
