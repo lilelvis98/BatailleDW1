@@ -54,11 +54,11 @@ session_start(); ?>
 						<label><input type="radio" name="orientation" id="V" value="0" <?php if( $_POST["orientation"] == "0") { echo "CHECKED"; } ?>> Vertical</label> <br/>
 
 				<br/>
-						<label><input type="radio" name="bateau" id="1" value="0" <?php if( $_POST["bateau"] == "0") { echo "CHECKED"; } ?>> [1] Porte-avion</label> <br/>
-						<label><input type="radio" name="bateau" id="1" value="1" <?php if( $_POST["bateau"] == "1") { echo "CHECKED"; } ?>> [2] Croiseur</label> <br/>
-						<label><input type="radio" name="bateau" id="1" value="2" <?php if( $_POST["bateau"] == "2") { echo "CHECKED"; } ?>> [3] Contre-torpilleur</label> <br/>
-						<label><input type="radio" name="bateau" id="1" value="3" <?php if( $_POST["bateau"] == "3") { echo "CHECKED"; } ?>> [4] Sous-marin</label> <br/>
-						<label><input type="radio" name="bateau" id="1" value="4" <?php if( $_POST["bateau"] == "4") { echo "CHECKED"; } ?>> [5] Torpilleur</label> <br/>
+						<label><input type="radio" name="bateau" id="1" value="0" <?php if( $_POST["bateau"] == "0") { echo "CHECKED"; } ?>> [1] Porte-avion <div id="en_savoir_plus"><a href="https://fr.wikipedia.org/wiki/Porte-avions">?</a></div></label> <br/>
+						<label><input type="radio" name="bateau" id="1" value="1" <?php if( $_POST["bateau"] == "1") { echo "CHECKED"; } ?>> [2] Croiseur <div id="en_savoir_plus"><a href="https://fr.wikipedia.org/wiki/Croiseur">?</a></div></label> <br/>
+						<label><input type="radio" name="bateau" id="1" value="2" <?php if( $_POST["bateau"] == "2") { echo "CHECKED"; } ?>> [3] Contre-torpilleur <div id="en_savoir_plus"><a href="https://fr.wikipedia.org/wiki/Destroyer">?</a></div></label> <br/>
+						<label><input type="radio" name="bateau" id="1" value="3" <?php if( $_POST["bateau"] == "3") { echo "CHECKED"; } ?>> [4] Sous-marin <div id="en_savoir_plus"><a href="https://fr.wikipedia.org/wiki/Sous-Marin">?</a></div></label> <br/>
+						<label><input type="radio" name="bateau" id="1" value="4" <?php if( $_POST["bateau"] == "4") { echo "CHECKED"; } ?>> [5] Torpilleur <div id="en_savoir_plus"><a href="https://fr.wikipedia.org/wiki/Torpilleur">?</a></div></label> <br/>
 				<br/>
 						<input id="cliva" name="cliquevalider" type="Submit" value="Placer le navire"/>
 				</form>

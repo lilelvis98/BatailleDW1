@@ -185,7 +185,26 @@ h1{
 	position:absolute;
 	bottom:3px;
 	left:20px;
-	color: black;
+	color: #000000;
+}
+
+#bdw_lien{
+	position:absolute;
+	bottom:3px;
+	right:20px;
+	color: #000000;
+}
+
+#wikipedia_lien{
+	position:fixed;
+	bottom:2em;
+	left:20px;
+	color: #000000;
+}
+
+#en_savoir_plus{
+	font-size: 70%;
+	display: inline;
 }
 
 #tab_contacts

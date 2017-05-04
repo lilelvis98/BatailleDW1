@@ -75,6 +75,12 @@ session_start(); ?>
 		<div id="github_lien">
 			<a href="http://github.com/lilelvis98/BatailleDW1"><i class="fa fa-github"></i> GitHub</a>
 		</div>
+		<div id="bdw_lien">
+			<a href="http://liris.cnrs.fr/nicolas.lumineau/"><i class="fa fa-university"></i> LIFBDW1</a>
+		</div>
+		<div id="wikipedia_lien">
+			<a href="https://fr.wikipedia.org/wiki/Bataille_navale_(jeu)"><i class="fa fa-wikipedia-w" aria-hidden="true"></i></i> Règles et Principes du Jeu</a>
+		</div>
 	</body>
 </html>
 
