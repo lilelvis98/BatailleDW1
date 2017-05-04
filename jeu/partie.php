@@ -13,6 +13,7 @@
 		<?php
 			require_once('./fonctions.php');
 			require_once('./fonctions_partie.php');
+			require_once('./fonctions_accueil.php');
 		?>
 		<h1>Il est temps choisir vos meilleurs marins Capitaine <?php echo $_SESSION['pseudo_joueur']; ?> !</h1><br/>
 		<div id="boutons_accueil">
@@ -58,8 +59,6 @@
 						<label><input type="radio" name="bateau" id="1" value="3" <?php if( $_POST["bateau"] == "3") { echo "CHECKED"; } ?>> [4] Sous-marin</label> <br/>
 						<label><input type="radio" name="bateau" id="1" value="4" <?php if( $_POST["bateau"] == "4") { echo "CHECKED"; } ?>> [5] Torpilleur</label> <br/>
 				<br/>
-				<br/>
-				<br/>
 						<input id="cliva" name="cliquevalider" type="Submit" value="Placer le navire"/>
 				</form>
 		        <br/>
@@ -70,8 +69,9 @@
 						AjouterBateau($_POST["bateau"], $_POST["orientation"], $_POST["lettre"], $_POST["chiffre"]);
 					}
  				?>
-			</div>
-			<div id="boitecarte"> <!-- div des dernières cartes jouées -->
+				<br/>
+				<br/>
+				<br/>
 				<form method='POST' action='./partie.php'>
 					<input id="valider_pos" name="cliquevalider" type="Submit" value="Valider les positions"/>
 				</form>
@@ -86,20 +86,21 @@
 					{					
 						header("Location: ./partie2.php");
 					}
-
 				?>
-					
 			</div>
+			<table id="tab_contacts">
+					<th id="th_contact">Contacts</th>
+					<tr id="marge_avant_contacts"></tr>
+					<?php
+						getamis(); 
+					?>
+			</table>
 			<div id="boitegrilles"> <!-- div de la grille perso -->
 				<?php 
 					
 					GrillePersoHTML();
 				?>
 			</div>
-			<!--<br/>
-			<div id="boitegrilles">
-				<?php getGrilleEnnemie(); ?>
-			</div> -->
 		</div>
 	</body>
 </html>

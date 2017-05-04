@@ -1,3 +1,5 @@
+<?php session_start(); ?>
+
 <!DOCTYPE html>
 <html>
 	<head>
@@ -8,21 +10,31 @@
 	</head>
 
 	<body>
+		<?php
+			require_once('./fonctions.php');
+			require_once('./fonctions_partie2.php');
+		?>
 		<h1>A l'abordage maintenant!</h1>
-			<div id="boutons_accueil">
-				Ici il y aura le dernière carte piochée et le Joueur qui est en train de faire son tour
+<div id="boutons_accueil">
+			<div id="boiteconsignes">
+				Ici il y aura la dernière carte piochée et le Joueur dont c'est le tour
+			</div>
+			<div id="boitecarte"> <!-- div des dernières cartes jouées -->
+				Ici ce sont les dernières cartes piochées
 			</div>
 			<div id="boitegrilles"> <!-- div de la grille perso et ennemie-->
 				<?php
+					CreationGrilleperso();
 					GrillePersoHTML();
 				?>
 			</div>
 			<br/>
 			<div id="boitegrilles">
-				<?php getGrilleEnnemie(); ?>
+				<?php 
+					CreationGrilleadv();
+					GrilleAdvHTML();
+				?>
 			</div>
-			<div id="boitecarte"> <!-- div des dernières cartes jouées -->
-				Ici ce sont les dernières cartes piochées
-			</div>
+</div>
 	</body>
 </html>
