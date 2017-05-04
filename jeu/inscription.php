@@ -4,9 +4,10 @@ session_start(); ?>
 <!DOCTYPE html>
 <html>
 	<head>
-
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 		<link rel="stylesheet" type="text/css" href="css/style_normal.css">
+
 		<title>La Bataille Navale</title>
 		<?php
 			require_once('./fonctions.php');
@@ -23,7 +24,6 @@ session_start(); ?>
 		<div id="boiteinscription2">
 			<div id="centrer">
 				<p>
-
 					<div>Formulaire d'inscription</div><br/>
 					<div id="ChampsObligatoires">* Ces champs sont requis</div>
 					<form method='POST' action='./inscription.php'>
@@ -34,8 +34,8 @@ session_start(); ?>
 					<p>
 						<div id="ChampsObligatoires">*<input id="prenomJ" name="prenomJoueur" type="text" size= 20 maxlength=20 placeholder="Prenom" /></div>
 					</p>
-					<label>F<input type="radio" name="sexeJoueur" id="homme" value="Homme" CHECKED></label>
-					<label>H<input type="radio" name="sexeJoueur" id="femme" value="Femme"></label>
+					<label><i class="fa fa-mars"></i><input type="radio" name="sexeJoueur" id="homme" value="Homme" CHECKED></label>
+					<label><input type="radio" name="sexeJoueur" id="femme" value="Femme"><i class="fa fa-venus"></i></label>
 					<p>
 						<div id="ChampsObligatoires">*<input id="dateNaissJ" name="dateNaissanceJoueur" type="text" size= 20 maxlength=20 placeholder="Date de Naissance" value="AAAA/MM/JJ" /></div>
 					</p>
@@ -75,6 +75,12 @@ session_start(); ?>
 					?>
 				</div>
 			</div>
+		</div>
+
+		<div id="bouton_retour">
+			<form method='POST' action='./index.php'>
+				<input id="cliret" name="cliqueRetour" type="submit" value="Retour à l'accueil"/>
+			</form>
 		</div>
 		
 	</body>

@@ -12,7 +12,7 @@ h1{
 	background-color: #c6d9ec;
  	width: 300px;
  	border: 12px solid #2d5986;
-	border-bottom: 3px dotted #2d5986;
+	border-bottom: 3px outset #2d5986;
  	padding: 20px;
 	margin-left: auto;
 	margin-right: auto;
