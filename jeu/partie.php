@@ -20,7 +20,7 @@ session_start(); ?>
 		<div id="boutons_accueil">
 			<div id="boiteconsignes"> <!-- div d'action (placement des bâteaux/pioche des cartes etc...) -->
 				<form method='POST' action='./partie.php'>
-						Choisissez la position de votre flotte, tous les bateau doivent être placés :<br/> <br/> <br/>
+						Choisissez la position de votre flotte, tous les bateaux doivent être placés :<br/> <br/> <br/>
 
 						<select name="lettre">
 						  <option value="1">A</option>

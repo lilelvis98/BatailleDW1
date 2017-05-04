@@ -270,11 +270,6 @@ input[id=pseudoadv]{
 	border-color: #003d99;
 }
 
-#GrillePerso
-{
-	border-collapse: 2px solid blue;
-}
-
 #CaseLeg
 {
 	background-color: #142a39;
@@ -337,4 +332,30 @@ input[id=pseudoadv]{
 	background-color: #9fb4c6;
 	width: 47px;
 	height: 47px;
+}
+
+#boiteTourPerso{
+	position: fixed;
+	float: left;
+	background-color: #8aa88a;
+	color: #000e00;
+	font-weight: bold;
+ 	width: 300px;
+ 	border: 12px solid #396039;
+ 	padding: 20px;
+	margin-left: 3%;
+	margin-right: auto;
+}
+
+#boiteTourAdv{
+	position: fixed;
+	float: left;
+	background-color: #604239;
+	color: #f8f2ec;
+	font-weight: bold;
+ 	width: 300px;
+ 	border: 12px solid #591f0d;
+ 	padding: 20px;
+	margin-left: 3%;
+	margin-right: auto;
 }
