@@ -29,7 +29,7 @@
 		{
 			$sql = "SELECT n.Nb_Cases AS Nb_Cases, b.Coord_X AS X, b.Coord_Y AS Y, b.Bool_Orientation AS Orientation FROM Bateau b NATURAL JOIN Type_Navire n WHERE b.Id_Partie = $id_partie AND b.Id_Joueur = $id_joueur AND b.Id_Type_Navire = ($i - 1)";
 
-			$result = $connexion->query($sql) or die("echec critique2 <br/>".mysqli_error());
+			$result = $connexion->query($sql) or die("echec critique de la creation grille perso<br/>".mysqli_error());
 
 			if($result == FALSE) // échec si FALSE
 			{
@@ -122,7 +122,7 @@
 		{			
 			$sql = "SELECT Id_Etat FROM Partie WHERE Id_Partie = $id_partie";
 			$Etat = mysqli_query($connexion, $sql);
-			$data = mysqli_fetch_assoc($result);
+			$data = mysqli_fetch_assoc($Etat);
 
 			if($data['Id_Etat'] == 0)
 			{
@@ -135,10 +135,9 @@
 				else
 				{
 					$partie_3 = true;
-					echo "c'est bon";
 				}
 			}
-			else if($data['Id_Etat'] == 3)
+			else
 			{
 				$sql = "UPDATE Partie SET Id_Etat = 4 WHERE Id_Partie = $id_partie";
 				$resultat = mysqli_query($connexion, $sql);

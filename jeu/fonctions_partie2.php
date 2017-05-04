@@ -15,7 +15,29 @@
 					"0","0","0","0","0","0","0","0","0","0",
 					"0","0","0","0","0","0","0","0","0","0");
 
+	$tirsperso = array("0","0","0","0","0","0","0","0","0","0",
+					"0","0","0","0","0","0","0","0","0","0",
+					"0","0","0","0","0","0","0","0","0","0",
+					"0","0","0","0","0","0","0","0","0","0",
+					"0","0","0","0","0","0","0","0","0","0",
+					"0","0","0","0","0","0","0","0","0","0",
+					"0","0","0","0","0","0","0","0","0","0",
+					"0","0","0","0","0","0","0","0","0","0",
+					"0","0","0","0","0","0","0","0","0","0",
+					"0","0","0","0","0","0","0","0","0","0");
+
 	$grilleadv = array("0","0","0","0","0","0","0","0","0","0",
+					"0","0","0","0","0","0","0","0","0","0",
+					"0","0","0","0","0","0","0","0","0","0",
+					"0","0","0","0","0","0","0","0","0","0",
+					"0","0","0","0","0","0","0","0","0","0",
+					"0","0","0","0","0","0","0","0","0","0",
+					"0","0","0","0","0","0","0","0","0","0",
+					"0","0","0","0","0","0","0","0","0","0",
+					"0","0","0","0","0","0","0","0","0","0",
+					"0","0","0","0","0","0","0","0","0","0");
+
+	$tirsadv = array("0","0","0","0","0","0","0","0","0","0",
 					"0","0","0","0","0","0","0","0","0","0",
 					"0","0","0","0","0","0","0","0","0","0",
 					"0","0","0","0","0","0","0","0","0","0",
@@ -69,6 +91,34 @@
 		}
 	}
 
+	function Creationtirsperso() //Création de la grille contenant les différents tirs effectués par le joueur
+	{
+		global $id_joueur;
+		global $connexion;
+		global $id_partie;
+		global $grilleperso;
+		global $tirsperso;
+		
+		for ( $i = 1; $i <= 5; $i++)
+		{
+			$sql = "SELECT tir.Coord_X AS X, tir.Coord_Y AS Y FROM Tir tir NATURAL JOIN Tour tr WHERE tr.Id_Partie = $id_partie AND tr.Id_Joueur = $id_joueur";
+			$result = $connexion->query($sql) or die("echec critique2 <br/>".mysqli_error());
+
+			if($result == FALSE) // échec si FALSE
+			{
+				echo "Échec de la requête de récupération des tirs <br/>";
+			}
+
+			while($data = mysqli_fetch_assoc($result)) //Découpage du résultat
+			{
+				$X = $data['X'];
+				$Y = $data['Y'];
+				$case = ($Y - 1)*10 + $X;
+				$tirsperso[$case] = 1;
+			}
+		}
+	}
+
 	function CreationGrilleadv()
 	{
 		global $id_joueur;
@@ -111,6 +161,33 @@
 		}
 	}
 
+	function Creationtirsadv() //Création de la grille contenant les différents tirs effectués par son adversaire
+	{
+		global $id_joueur;
+		global $connexion;
+		global $id_partie;
+		global $grilleperso;
+		global $tirsadv;
+		
+		for ( $i = 1; $i <= 5; $i++)
+		{
+			$sql = "SELECT tir.Coord_X AS X, tir.Coord_Y AS Y FROM Tir tir NATURAL JOIN Tour tr WHERE tr.Id_Partie = $id_partie AND tr.Id_Joueur != $id_joueur";
+			$result = $connexion->query($sql) or die("echec critique2 <br/>".mysqli_error());
+
+			if($result == FALSE) // échec si FALSE
+			{
+				echo "Échec de la requête de récupération des tirs <br/>";
+			}
+
+			while($data = mysqli_fetch_assoc($result)) //Découpage du résultat
+			{
+				$X = $data['X'];
+				$Y = $data['Y'];
+				$tirsadv[($Y - 1)*10 + $X] = 1;
+			}
+		}
+	}
+
 	function AjouterBateau($bateau, $orientation, $lettre, $chiffre)
 	{
 		global $id_joueur;
@@ -125,73 +202,10 @@
 		}
 	}
 
-	function GrilleValidable()
-	{
-		global $grille;
-		global $partie_2;
-		global $connexion;
-		global $id_partie;
-
-		$nb_1 = 5;
-		$nb_2 = 4;
-		$nb_3 = 3;
-		$nb_4 = 3;
-		$nb_5 = 2;
-		
-		for( $chiffre = 1; $chiffre <= 10; $chiffre++)
-		{
-			for( $lettre = 1; $lettre <= 10; $lettre++)
-			{
-				$case=($chiffre - 1)*10 + $lettre;
-				switch ($grille[$case])
-				{
-					case 1 :
-						$nb_1--;
-						break;
-
-					case 2 :
-						$nb_2--;
-						break;
-
-					case 3 :
-						$nb_3--;
-						break;
-
-					case 4 :
-						$nb_4--;
-						break;
-
-					case 5 :
-						$nb_5--;
-						break;
-				}
-			}
-		}
-
-		if($nb_1 == 0 && $nb_2 == 0 && $nb_3 == 0 && $nb_4 == 0 && $nb_5 == 0)
-		{
-			$sql = "UPDATE Partie SET Id_Etat = 2 WHERE Id_Partie = $id_partie";
-			$resultat = mysqli_query($connexion, $sql);
-			if ($resultat == FALSE)
-			{
-				echo "Erreur : Impossible de continuer la partie : ".$sql;
-			}
-			else
-			{
-				$partie_2 = true;
-			}
-		}
-		else
-		{
-			echo "<br/><br/>Votre formation n'est pas correcte moussaillon !";
-		}
-	}
-
-
-
 	function GrillePersoHTML()
 	{
 		global $grilleperso;
+		global $tirsadv;
 		echo "<table id=GrillePerso>";
 
 		for( $chiffre = 0; $chiffre <= 10; $chiffre++)
@@ -264,6 +278,7 @@
 	function GrilleAdvHTML()
 	{
 		global $grilleadv;
+		global $tirsperso;
 		echo "<table id=GrillePerso>";
 
 		for( $chiffre = 0; $chiffre <= 10; $chiffre++)
@@ -318,13 +333,17 @@
 				{
 					echo "<td id=CaseLeg>".$chiffre."</td>";
 				}
-				else if ($grilleadv[$case] != 0)
+				else if ($grilleadv[$case] != 0 and $tirsperso[$case] != 0)
 				{
-					echo "<td id=CaseBateau>".$grilleadv[$case]."</td>";
+					echo "<td id=CaseBateauTouche></td>";
+				}
+				else if ($tirsperso[$case] != 0)
+				{				
+					echo "<td id=CaseEauTouche></td>";
 				}
 				else
 				{				
-					echo "<td id=CaseEau></td>";
+					echo "<td id=CaseInconnue></td>";
 				}
 			}
 			echo "</tr>";

@@ -80,15 +80,6 @@ h1{
 	font-variant: small-caps;
 }
 
-#BateauPlace
-{
-	
-}
-
-#BateauPasPlace
-{
-	
-}
 
 #boitecarte{
 	float: right;
@@ -106,6 +97,28 @@ h1{
  	width: 600px;
 	height: 600px;
  	border: 12px solid #2d5986;
+ 	padding: 20px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+#boitegrilleperso{
+	float: center;
+	background-color: #8aa88a;
+ 	width: 600px;
+	height: 600px;
+ 	border: 12px solid #396039;
+ 	padding: 20px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+#boitegrilleadv{
+	float: center;
+	background-color: #604239;
+ 	width: 600px;
+	height: 600px;
+ 	border: 12px solid #591f0d;
  	padding: 20px;
 	margin-left: auto;
 	margin-right: auto;
@@ -285,6 +298,27 @@ input[id=pseudoadv]{
 #CaseEau
 {
 	background-color: #0a4976;
+	width: 47px;
+	height: 47px;
+}
+
+#CaseBateauTouche
+{
+	background-color: #5c748a;
+	width: 47px;
+	height: 47px;
+}
+
+#CaseEauTouche
+{
+	background-color: #3477b2;
+	width: 47px;
+	height: 47px;
+}
+
+#CaseInconnue
+{
+	background-color: #9fb4c6;
 	width: 47px;
 	height: 47px;
 }
