@@ -3,9 +3,7 @@
 	$id_joueur = $_SESSION["id_joueur"];
 	$id_partie = $_SESSION["id_partie"];
 	$connexion = $_SESSION['connexion'];
-	$partie_2 = false;
-	$partie_3 = false;
-	$grille = array("0","0","0","0","0","0","0","0","0","0",
+	$grilleperso = array("0","0","0","0","0","0","0","0","0","0",
 					"0","0","0","0","0","0","0","0","0","0",
 					"0","0","0","0","0","0","0","0","0","0",
 					"0","0","0","0","0","0","0","0","0","0",
@@ -15,6 +13,7 @@
 					"0","0","0","0","0","0","0","0","0","0",
 					"0","0","0","0","0","0","0","0","0","0",
 					"0","0","0","0","0","0","0","0","0","0");
+	$pseudo_adv = "BarbeRousse";
 
 
 	function CreationGrilleperso()
@@ -22,7 +21,7 @@
 		global $id_joueur;
 		global $connexion;
 		global $id_partie;
-		global $grille;
+		global $grilleperso;
 		
 		for ( $i = 1; $i <= 5; $i++)
 		{
@@ -44,7 +43,7 @@
 			{
 				if($X != NULL)
 				{
-					$grille[($Y - 1)*10 + $X]=$i;
+					$grilleperso[($Y - 1)*10 + $X]=$i;
 				}
 
 				if ($Orientation == true)
@@ -59,106 +58,10 @@
 		}
 	}
 
-	function AjouterBateau($bateau, $orientation, $lettre, $chiffre)
-	{
-		global $id_joueur;
-		global $connexion;
-		global $id_partie;
-
-		$sql = "UPDATE Bateau SET Coord_X = $lettre, Coord_Y = $chiffre,  Bool_Orientation = $orientation WHERE Id_Joueur = $id_joueur AND Id_Partie = $id_partie AND Id_Type_Navire = $bateau";
-		$resultat = mysqli_query($connexion, $sql);
-		if ($resultat == FALSE)
-		{
-			echo "Erreur : Impossible de faire cette requête : ".$sql;
-		}
-	}
-
-	function GrilleValidable()
-	{
-		global $grille;
-		global $partie_2;
-		global $connexion;
-		global $id_partie;
-
-		$nb_1 = 5;
-		$nb_2 = 4;
-		$nb_3 = 3;
-		$nb_4 = 3;
-		$nb_5 = 2;
-		
-		for( $chiffre = 1; $chiffre <= 10; $chiffre++)
-		{
-			for( $lettre = 1; $lettre <= 10; $lettre++)
-			{
-				$case=($chiffre - 1)*10 + $lettre;
-				switch ($grille[$case])
-				{
-					case 1 :
-						$nb_1--;
-						break;
-
-					case 2 :
-						$nb_2--;
-						break;
-
-					case 3 :
-						$nb_3--;
-						break;
-
-					case 4 :
-						$nb_4--;
-						break;
-
-					case 5 :
-						$nb_5--;
-						break;
-				}
-			}
-		}
-
-		if($nb_1 == 0 && $nb_2 == 0 && $nb_3 == 0 && $nb_4 == 0 && $nb_5 == 0)
-		{
-			$sql = "SELECT Id_Etat FROM Partie WHERE Id_Partie = $id_partie";
-			$Etat = mysqli_query($connexion, $sql);
-
-			if($Etat == 0)
-			{
-				$sql = "UPDATE Partie SET Id_Etat = 3 WHERE Id_Partie = $id_partie";
-				$resultat = mysqli_query($connexion, $sql);
-				if ($resultat == FALSE)
-				{
-					echo "Erreur : Impossible de continuer la partie : ".$sql;
-				}
-				else
-				{
-					$partie_3 = true;
-				}
-			}
-			else if($Etat == 3)
-			{
-				$sql = "UPDATE Partie SET Id_Etat = 4 WHERE Id_Partie = $id_partie";
-				$resultat = mysqli_query($connexion, $sql);
-				if ($resultat == FALSE)
-				{
-					echo "Erreur : Impossible de continuer la partie : ".$sql;
-				}
-				else
-				{
-					$partie_2 = true;
-				}
-			}
-		}
-		else
-		{
-			echo "<br/><br/>Votre formation n'est pas correcte moussaillon !";
-		}
-	}
-
-
-
+	
 	function GrillePersoHTML()
 	{
-		global $grille;
+		global $grilleperso;
 		echo "<table id=GrillePerso>";
 
 		for( $chiffre = 0; $chiffre <= 10; $chiffre++)
@@ -213,9 +116,9 @@
 				{
 					echo "<td id=CaseLeg>".$chiffre."</td>";
 				}
-				else if ($grille[$case] != 0)
+				else if ($grilleperso[$case] != 0)
 				{
-					echo "<td id=CaseBateau>".$grille[$case]."</td>";
+					echo "<td id=CaseBateau>".$grilleperso[$case]."</td>";
 				}
 				else
 				{				
@@ -226,6 +129,28 @@
 		}
 
 		echo "</table>";
+	}
+
+	function getadv()
+	{
+		global $connexion;
+		global $id_partie;
+		global $id_joueur;
+		global $pseudo_adv;
+
+		$sql = "SELECT j.Pseudo AS pseudo FROM Joueur j JOIN Partie p ON p.Id_Initiateur = j.Id_Joueur OR p.Id_Invite = j.Id_Joueur WHERE j.Id_Joueur != $id_joueur AND p.Id_Partie = $id_partie";
+		$result = $connexion->query($sql) or die("echec critique2 <br/>".mysqli_error());
+
+		$data = mysqli_fetch_assoc($result);
+
+		if($result == FALSE) // échec si FALSE
+		{
+			echo "Échec de la requête6 <br/>";
+		}
+		else
+		{
+			$pseudo_adv = $data['pseudo'];
+		}
 	}
 
 

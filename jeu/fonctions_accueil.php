@@ -38,7 +38,7 @@
 			echo '</tr>';
 			echo '<tr>';
 			echo '   <td id="contact_last_game">';
-			if ($id_etat_data == 1 or $id_etat_data == 3)
+			if ($id_etat_data == 1 or $id_etat_data == 3 or $id_etat_data == 4)
 			{
 				echo "Partie en cours, débutée le ".$max_date_data;
 			}
