@@ -91,8 +91,9 @@
 										}else{echo "Error: " . $sql . "<br>" . $connexion->error;}
 									}
 								}else if($id_etat_partie == 3){
+									$id_partie = $_SESSION['id_partie']; //Un peu bête mais ça fix le bug hein pour le moment
 									CreationGrilleperso();
-									GrilleValidable();
+									GrilleValidable_jouerphp();
 									//On vérifie que l'utilisateur soit celui qui doive poser ses bateaux...
 									if ($grille_terminee_jouer_php){
 										header("Location: partie3.php");
