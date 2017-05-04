@@ -260,13 +260,21 @@
 				{
 					echo "<td id=CaseLeg>".$chiffre."</td>";
 				}
+				else if ($grilleperso[$case] != 0 and $tirsadv[$case] != 0)
+				{
+					echo "<td id=CaseBateauTouche>".$grilleperso[$case]."</td>";
+				}
 				else if ($grilleperso[$case] != 0)
 				{
 					echo "<td id=CaseBateau>".$grilleperso[$case]."</td>";
 				}
+				else if ($tirsadv[$case] != 0)
+				{				
+					echo "<td id=CaseEauTouche>T</td>";
+				}
 				else
 				{				
-					echo "<td id=CaseEau></td>";
+					echo "<td id=CaseEauTouche></td>";
 				}
 			}
 			echo "</tr>";
