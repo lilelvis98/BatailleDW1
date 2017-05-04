@@ -145,10 +145,23 @@ h1{
 {
 	position: fixed;
 	top: 3px;
-	left: 3px;
+	right: 3px;
 }
 
 #bouton_deco :hover
+{
+	background-color:#ffffe6;
+	border-radius: 6px;
+}
+
+#bouton_retour
+{
+	position: fixed;
+	top: 3px;
+	left: 3px;
+}
+
+#bouton_retour :hover
 {
 	background-color:#ffffe6;
 	border-radius: 6px;
@@ -241,9 +254,6 @@ input[id=pseudoadv]{
 	text-align: center;
 	font-weight: bold;
 	border-color: #003d99;
-}
-
-input.deconnexion{
 }
 
 #GrillePerso
