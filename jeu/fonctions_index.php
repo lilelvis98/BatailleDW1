@@ -26,6 +26,12 @@
 			//On vérifie que le MDP est bon
 			if (password_verify($mdp_donne, $mdp_bd["Mdp"])){
 				$est_connecte = true;
+
+				//On passe le Joueur en ligne
+				$sql_co = "UPDATE Joueur SET Online = 1 WHERE Id_Joueur = $id_joueur";
+				$resultat_co = mysqli_query($connexion, $sql_co);
+				if (!$resultat_co){echo "Woops";}
+
 				global $pseudo_joueur;
 				$pseudo_joueur = $pseudo_donne;
 				$_SESSION["id_joueur"] = $id_joueur;

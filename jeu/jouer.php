@@ -89,6 +89,10 @@
 											header("Location: partie.php");
 										}else{echo "Error: " . $sql . "<br>" . $connexion->error;}
 									}
+								}else if($id_etat_partie == 3){
+									header("Location: partie3.php");
+								}else if($id_etat_partie == 4){
+									header("Location: partie2.php");
 								}
 							}
 							echo "</div>";

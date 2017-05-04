@@ -62,6 +62,12 @@
 				$resultat = mysqli_query($connexion, $sql);
 				if ($resultat) {
 					$inscription_faite = true;
+
+					//On passe le Joueur en ligne
+					$sql_co = "UPDATE Joueur SET Online = 1 WHERE Id_Joueur = $id_joueur";
+					$resultat_co = mysqli_query($connexion, $sql_co);
+					if (!$resultat_co){echo "Woops";}
+
 					$_SESSION["id_joueur"] = $id_insc;
 				} else {
     			echo "Error: " . $sql . "<br>" . $connexion->error;
