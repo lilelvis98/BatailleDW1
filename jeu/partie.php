@@ -85,6 +85,10 @@ session_start(); ?>
 
 					if ($partie_2)
 					{					
+						header("Location: ./partie2.php");
+					}
+					else if($partie_3)
+					{
 						header("Location: ./partie3.php");
 					}
 				?>

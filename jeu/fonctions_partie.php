@@ -77,6 +77,7 @@
 	{
 		global $grille;
 		global $partie_2;
+		global $partie_3;
 		global $connexion;
 		global $id_partie;
 
