@@ -14,6 +14,7 @@
 	<body>
 		<?php
 			require_once('./fonctions.php');
+			require_once('./fonctions_partie.php');
 			require_once('./fonctions_jouer.php');
 		?>
 		<h1> Invitez un Joueur à une nouvelle partie ou reprenez une partie en cours ! </h1><br />
@@ -77,7 +78,7 @@
 									header("Location: partie.php");
 								}else if ($id_etat_partie == 1){
 									//Si la partie est en attente, on regarde si l'utilisateur est l'invité. Si oui, on lance la partie
-									$sql3 = "SELECT Id_Invite FROM Partie WHERE Id_Initiateur = $id_adversaire AND Id_Etat = 1";
+									$sql3 = "SELECT Id_Invite FROM Partie WHERE Id_Invite = $id_joueur AND Id_Initiateur = $id_adversaire AND Id_Etat = 1";
 									$resultat3 = $connexion->query($sql3);
 									if ($resultat3->num_rows === 0){
 										echo "Vous avez invité $pseudo_adversaire, mais il n'a pas encore répondu...";
@@ -90,7 +91,15 @@
 										}else{echo "Error: " . $sql . "<br>" . $connexion->error;}
 									}
 								}else if($id_etat_partie == 3){
-									header("Location: partie3.php");
+									CreationGrilleperso();
+									GrilleValidable();
+									//On vérifie que l'utilisateur soit celui qui doive poser ses bateaux...
+									if ($grille_terminee_jouer_php){
+										header("Location: partie3.php");
+									}
+									else{
+										header("Location: partie.php");
+									}
 								}else if($id_etat_partie == 4){
 									header("Location: partie2.php");
 								}

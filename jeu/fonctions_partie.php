@@ -15,6 +15,7 @@
 					"0","0","0","0","0","0","0","0","0","0",
 					"0","0","0","0","0","0","0","0","0","0",
 					"0","0","0","0","0","0","0","0","0","0");
+	$grille_terminee_jouer_php = false;
 
 
 	function CreationGrilleperso()
@@ -155,7 +156,53 @@
 		}
 	}
 
+	function GrilleValidable_jouerphp(){
+		global $grille;
+		global $partie_2;
+		global $connexion;
+		global $id_partie;
+		global $grille_terminee_jouer_php;
 
+		$nb_1 = 5;
+		$nb_2 = 4;
+		$nb_3 = 3;
+		$nb_4 = 3;
+		$nb_5 = 2;
+		
+		for( $chiffre = 1; $chiffre <= 10; $chiffre++)
+		{
+			for( $lettre = 1; $lettre <= 10; $lettre++)
+			{
+				$case=($chiffre - 1)*10 + $lettre;
+				switch ($grille[$case])
+				{
+					case 1 :
+						$nb_1--;
+						break;
+
+					case 2 :
+						$nb_2--;
+						break;
+
+					case 3 :
+						$nb_3--;
+						break;
+
+					case 4 :
+						$nb_4--;
+						break;
+
+					case 5 :
+						$nb_5--;
+						break;
+				}
+			}
+		}
+		if($nb_1 == 0 && $nb_2 == 0 && $nb_3 == 0 && $nb_4 == 0 && $nb_5 == 0)
+		{
+			$grille_terminee_jouer_php = true;
+		}
+	}
 
 	function GrillePersoHTML()
 	{
