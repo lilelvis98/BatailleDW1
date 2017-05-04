@@ -150,8 +150,9 @@ h1{
 
 #bouton_deco :hover
 {
-	background-color:#ffffe6;
+	background-color:#fefee7;
 	border-radius: 6px;
+	color: #b30000;
 }
 
 #bouton_retour
@@ -163,7 +164,7 @@ h1{
 
 #bouton_retour :hover
 {
-	background-color:#ffffe6;
+	background-color:#fefee7;
 	border-radius: 6px;
 }
 
