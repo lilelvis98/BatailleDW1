@@ -3,6 +3,7 @@
 	$id_joueur = $_SESSION["id_joueur"];
 	$id_partie = $_SESSION["id_partie"];
 	$connexion = $_SESSION['connexion'];
+	$partie_2 = false;
 	$grilleperso = array("0","0","0","0","0","0","0","0","0","0",
 					"0","0","0","0","0","0","0","0","0","0",
 					"0","0","0","0","0","0","0","0","0","0",
@@ -13,6 +14,18 @@
 					"0","0","0","0","0","0","0","0","0","0",
 					"0","0","0","0","0","0","0","0","0","0",
 					"0","0","0","0","0","0","0","0","0","0");
+
+	$grilleadv = array("0","0","0","0","0","0","0","0","0","0",
+					"0","0","0","0","0","0","0","0","0","0",
+					"0","0","0","0","0","0","0","0","0","0",
+					"0","0","0","0","0","0","0","0","0","0",
+					"0","0","0","0","0","0","0","0","0","0",
+					"0","0","0","0","0","0","0","0","0","0",
+					"0","0","0","0","0","0","0","0","0","0",
+					"0","0","0","0","0","0","0","0","0","0",
+					"0","0","0","0","0","0","0","0","0","0",
+					"0","0","0","0","0","0","0","0","0","0");
+
 	$pseudo_adv = "BarbeRousse";
 
 
@@ -58,6 +71,47 @@
 		}
 	}
 
+	function CreationGrilleadv()
+	{
+		global $id_joueur;
+		global $connexion;
+		global $id_partie;
+		global $grilleadv;
+		
+		for ( $i = 1; $i <= 5; $i++)
+		{
+			$sql = "SELECT n.Nb_Cases AS Nb_Cases, b.Coord_X AS X, b.Coord_Y AS Y, b.Bool_Orientation AS Orientation FROM Bateau b NATURAL JOIN Type_Navire n WHERE b.Id_Partie = $id_partie AND b.Id_Joueur != $id_joueur AND b.Id_Type_Navire = ($i - 1)";
+
+			$result = $connexion->query($sql) or die("echec critique2 <br/>".mysqli_error());
+
+			if($result == FALSE) // échec si FALSE
+			{
+				echo "Échec de la requête6 <br/>";
+			}
+
+			$data = mysqli_fetch_assoc($result); //Découpage du résultat
+			$Nb_cases = $data['Nb_Cases'];
+			$X = $data['X'];
+			$Y = $data['Y'];
+			$Orientation = $data['Orientation'];
+			for ($Nb_cases = $data['Nb_Cases']; $Nb_cases != 0; $Nb_cases--)
+			{
+				if($X != NULL)
+				{
+					$grilleadv[($Y - 1)*10 + $X]=$i;
+				}
+
+				if ($Orientation == true)
+				{
+					$X++;
+				}
+				else
+				{
+					$Y++;
+				}
+			}
+		}
+	}
 	
 	function GrillePersoHTML()
 	{
@@ -153,7 +207,75 @@
 		}
 	}
 
+	function GrilleValidable()
+	{
+		global $grilleadv;
+		global $partie_2;
+		global $connexion;
+		global $id_partie;
 
+		$nb_1 = 5;
+		$nb_2 = 4;
+		$nb_3 = 3;
+		$nb_4 = 3;
+		$nb_5 = 2;
+		
+		for( $chiffre = 1; $chiffre <= 10; $chiffre++)
+		{
+			for( $lettre = 1; $lettre <= 10; $lettre++)
+			{
+				$case=($chiffre - 1)*10 + $lettre;
+				switch ($grilleadv[$case])
+				{
+					case 1 :
+						$nb_1--;
+						break;
+
+					case 2 :
+						$nb_2--;
+						break;
+
+					case 3 :
+						$nb_3--;
+						break;
+
+					case 4 :
+						$nb_4--;
+						break;
+
+					case 5 :
+						$nb_5--;
+						break;
+				}
+			}
+		}
+
+		if($nb_1 == 0 && $nb_2 == 0 && $nb_3 == 0 && $nb_4 == 0 && $nb_5 == 0)
+		{
+			$sql = "UPDATE Partie SET Id_Etat = 4 WHERE Id_Partie = $id_partie";
+			$resultat = mysqli_query($connexion, $sql);
+			if ($resultat == FALSE)
+			{
+				echo "Erreur : Impossible de continuer la partie : ".$sql;
+			}
+			else
+			{
+				$partie_2 = true;
+
+				$sql = "SELECT Id_Invite FROM Partie WHERE Id_Partie = $id_partie";
+				$result = $connexion->query($sql) or die("echec requete : ".$sql);
+				$data = mysqli_fetch_assoc($result);
+				$id_invite = $data['Id_Invite'];
+
+				$sql = "INSERT INTO Tour(Id_Partie, Id_Tour, Id_Joueur, Id_Carte) VALUES ($id_partie, 1, $id_invite, 0)";
+				$result = $connexion->query($sql) or die("echec requete : ".$sql);
+				if($result == FALSE) // échec si FALSE
+				{
+					echo "Échec de la requête : $sql <br/>";
+				}
+			}
+		}
+	}
 
 ?>
 

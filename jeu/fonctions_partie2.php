@@ -3,6 +3,7 @@
 	$id_joueur = $_SESSION["id_joueur"];
 	$id_partie = $_SESSION["id_partie"];
 	$connexion = $_SESSION['connexion'];
+	$gagnant = "BarbeRousse";
 	$pseudo_adv = "BarbeRousse";
 	$grilleperso = array("0","0","0","0","0","0","0","0","0","0",
 					"0","0","0","0","0","0","0","0","0","0",
@@ -366,8 +367,9 @@
 		global $connexion;
 		global $id_partie;
 		global $pseudo_adv;
+		global $gagnant;
 
-		$sql = "SELECT DISTINCT tou.Id_Joueur AS joueur FROM Tour tou NATURAL JOIN Tir ti WHERE tou.Id_Tour = (SELECT Max(Id_Tour) FROM Tour WHERE Id_Partie = $id_partie)";
+		$sql = "SELECT DISTINCT tou.Id_Joueur AS joueur FROM Tour tou WHERE tou.Id_Tour = (SELECT Max(Id_Tour) FROM Tour WHERE Id_Partie = $id_partie)";
 		$resultat = mysqli_query($connexion, $sql);
 		if ($resultat == FALSE)
 		{
@@ -375,51 +377,79 @@
 		}
 		else
 		{
-			$data = mysqli_fetch_assoc($resultat);	
-			if ($data['joueur'] == $id_joueur)
+			if($gagnant != "BarbeRousse")
 			{
-				echo '<div id="boiteTourPerso">
-					<form method="POST" action="./partie2.php">
-						Capitaine, quels sont vos ordres de tir ? <br/><br/>
-						<select name="lettre">
-						  <option value="1">A</option>
-						  <option value="2">B</option>
-						  <option value="3">C</option>
-						  <option value="4">D</option>
-						  <option value="5">E</option>
-						  <option value="6">F</option>
-						  <option value="7">G</option>
-						  <option value="8">H</option>
-						  <option value="9">I</option>
-						  <option value="10">J</option>
-						</select>
-						<select name="chiffre">
-						  <option value="1">1</option>
-						  <option value="2">2</option>
-						  <option value="3">3</option>
-						  <option value="4">4</option>
-						  <option value="5">5</option>
-						  <option value="6">6</option>
-						  <option value="7">7</option>
-						  <option value="8">8</option>
-						  <option value="9">9</option>
-						  <option value="10">10</option>
-						</select>
-						<br/>
-						<br/>
-						<input id="valider_tir" name="cliquevalider" type="Submit" value="Feu !!!"/>
-					</form>	
-				</div>';
+				$joueur = $_SESSION['pseudo_joueur'];				
+				if($gagnant == $joueur)
+				{
+					echo '<div id="boiteTourPerso">
+							Par la barbe de BarbeRousse ! Vous avez détruit toute la flotte de '.$pseudo_adv.' !<br/><br/>';
+					echo '<form method=\'POST\' action=\'./accueil.php\'>
+								<input id="valider_pos" name="cliquevalider" type="Submit" value="Retourner à l\'accueil ?"/>
+							</form></div>';
+				}
+				else
+				{
+					echo '<div id="boiteTourAdv">
+							Votre flotte entière a été détruite sous les canons du pirate '.$pseudo_adv.' !<br/><br/>';
+					echo '<form method=\'POST\' action=\'./accueil.php\'>
+								<input id="valider_pos" name="cliquevalider" type="Submit" value="Retourner à l\'accueil ?"/>
+							</form></div>';
+				}
 			}
 			else
 			{
-				echo '<div id="boiteTourAdv">
-						Tous aux abris, '.$pseudo_adv.' vous canarde !<br/><br/>
-						<form method=\'POST\' action=\'./accueil.php\'>
-							<input id="valider_pos" name="cliquevalider" type="Submit" value="Retourner à l\'accueil"/>
-						</form>
-					</div>';
-			}
+				$data = mysqli_fetch_assoc($resultat);	
+				if ($data['joueur'] == $id_joueur)
+				{
+					echo '<div id="boiteTourPerso">
+						<form method="POST" action="./partie2.php">
+							Capitaine, quels sont vos ordres de tir ? <br/><br/>
+							<select name="lettre">
+							  <option value="1">A</option>
+							  <option value="2">B</option>
+							  <option value="3">C</option>
+							  <option value="4">D</option>
+							  <option value="5">E</option>
+							  <option value="6">F</option>
+							  <option value="7">G</option>
+							  <option value="8">H</option>
+							  <option value="9">I</option>
+							  <option value="10">J</option>
+							</select>
+							<select name="chiffre">
+							  <option value="1">1</option>
+							  <option value="2">2</option>
+							  <option value="3">3</option>
+							  <option value="4">4</option>
+							  <option value="5">5</option>
+							  <option value="6">6</option>
+							  <option value="7">7</option>
+							  <option value="8">8</option>
+							  <option value="9">9</option>
+							  <option value="10">10</option>
+							</select>
+							<br/>
+							<br/>
+							<input id="valider_tir" name="cliquevalider" type="Submit" value="Feu !!!"/>
+						</form>';
+					if(isset($_POST['lettre']) and isset($_POST['chiffre']))
+					{
+						FinTour($_POST['lettre'], $_POST['chiffre']);
+					}
+					echo '</div>';
+				
+				}
+				else
+				{
+					echo '<div id="boiteTourAdv">
+							Tous aux abris, '.$pseudo_adv.' vous canarde !<br/><br/>
+							<form method=\'POST\' action=\'./accueil.php\'>
+								<input id="valider_pos" name="cliquevalider" type="Submit" value="Retourner à l\'accueil"/>
+							</form>
+						</div>';
+				}
+			}	
 		}
 	}
 
@@ -431,7 +461,7 @@
 		global $pseudo_adv;
 
 		$sql = "SELECT j.Pseudo AS pseudo FROM Joueur j JOIN Partie p ON p.Id_Initiateur = j.Id_Joueur OR p.Id_Invite = j.Id_Joueur WHERE j.Id_Joueur != $id_joueur AND p.Id_Partie = $id_partie";
-		$result = $connexion->query($sql) or die("echec critique2 <br/>".mysqli_error());
+		$result = $connexion->query($sql) or die("echec requete : ".$sql);
 
 		$data = mysqli_fetch_assoc($result);
 
@@ -442,6 +472,106 @@
 		else
 		{
 			$pseudo_adv = $data['pseudo'];
+		}
+	}
+
+	function FinTour($lettre, $chiffre)
+	{
+		global $connexion;
+		global $id_partie;
+		global $id_joueur;
+		global $tirsperso;
+
+		if($tirsperso[($chiffre - 1)*10 + $lettre] != 0)
+		{
+			echo "<br/>Vous avez déjà tiré ici Marin d'eaux douces !";
+		}
+		else
+		{
+			$sql = "SELECT Max(Id_Tour) AS Dern_Tour FROM Tour WHERE Id_Partie = $id_partie"; //Selectionne le dernier tour de la partie
+			$result = $connexion->query($sql) or die("echec requete : ".$sql);
+			if($result == FALSE) // échec si FALSE
+			{
+				echo "Échec de la requête : ".$sql;
+			}
+			$data = mysqli_fetch_assoc($result);
+			$dern_tour = $data['Dern_Tour'];
+
+			$sql = "INSERT INTO Tir(Id_Tour, Coord_X, Coord_Y, Bool_Touche) VALUES ($dern_tour, $lettre, $chiffre, 0)";
+			$result = $connexion->query($sql) or die("echec requete : ".$sql);
+			if($result == FALSE) // échec si FALSE
+			{
+				echo "Échec de la requête : $sql <br/>";
+			}
+
+			//Test de victoire
+
+			$sql = "SELECT Max(Id_Tour) AS max_id_tour FROM Tour";
+			$result = $connexion->query($sql);
+			$data = mysqli_fetch_assoc($result);
+			$nouveau_tour = $data['max_id_tour'] + 1;
+			if($result == FALSE) // échec si FALSE
+			{
+				echo "Échec de la requête : $sql <br/>";
+			}
+
+			$sql = "SELECT j.Id_Joueur AS id_adv FROM Joueur j JOIN Partie p ON p.Id_Initiateur = j.Id_Joueur OR p.Id_Invite = j.Id_Joueur WHERE j.Id_Joueur != $id_joueur AND p.Id_Partie = $id_partie";
+			$result = $connexion->query($sql) or die("echec requete : ".$sql);
+			$data = mysqli_fetch_assoc($result);
+			$Id_Adversaire = $data['id_adv'];
+
+			$sql = "INSERT INTO Tour(Id_Partie, Id_Tour, Id_Joueur, Id_Carte) VALUES ($id_partie, $nouveau_tour, $Id_Adversaire, 0)";
+			$result = $connexion->query($sql) or die("echec requete : ".$sql);
+			if($result == FALSE) // échec si FALSE
+			{
+				echo "Échec de la requête : $sql <br/>";
+			}
+		}
+	}
+
+	function FinJeu()
+	{
+		global $connexion;
+		global $id_partie;
+		global $gagnant;
+		global $pseudo_adv;
+		global $grilleadv;
+		global $grilleperso;
+		global $tirsperso;
+		global $tirsadv;
+
+		$PersoGagne = 17;
+		$AdvGagne = 17;
+		
+		for($i = 1; $i <= 10; $i++)
+		{
+			for($j = 1; $j <= 10; $j++)
+			{
+				$case=($i - 1)*10 + $j;
+				if($grilleadv[$case] != 0 and $tirsperso[$case] != 0)
+				{
+					$PersoGagne--;
+				}
+				if($grilleperso[$case] != 0 and $tirsadv[$case] != 0)
+				{
+					$AdvGagne--;
+				}
+			}
+		}
+
+		if($PersoGagne == 0)
+		{
+			$gagnant = $_SESSION['pseudo_joueur'];
+		}
+		else if ($AdvGagne == 0)
+		{
+			$gagnant = $pseudo_adv;
+			$sql = "UPDATE Partie SET Id_Etat = 2 WHERE Id_Partie = $id_partie";
+			$resultat = mysqli_query($connexion, $sql);
+			if ($resultat == FALSE)
+			{
+				echo "Erreur : Impossible de continuer la partie : ".$sql;
+			}
 		}
 	}
 

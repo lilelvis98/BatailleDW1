@@ -19,8 +19,17 @@ session_start(); ?>
 		<h1>A l'abordage maintenant!</h1>
 		<div id="boutons_accueil">
 			<?php
+				CreationGrilleperso();
+				Creationtirsadv();
+				CreationGrilleadv();
+				Creationtirsperso();
 				getadv();
+				FinJeu();
 				getActionTour();
+				if($_POST['cliquevalider'] == "Feu !!!")
+				{
+					header("Location: ./partie2.php");
+				}
 			?>
 			<table id="tab_contacts">
 					<th id="th_contact">Contacts</th>
@@ -32,18 +41,19 @@ session_start(); ?>
 			<div id="boitegrilleadv"> <!-- div de la grille perso et ennemie-->
 				<?php
 					CreationGrilleadv();
-					Creationtirsperso();
 					GrilleAdvHTML();
 				?>
 			</div>
 			<br/>
 			<div id="boitegrilleperso">
 				<?php 
-					CreationGrilleperso();
-					Creationtirsadv();
 					GrillePersoHTML();
 				?>
 			</div>
-		</div>
+			<div id="bouton_deco">
+			<form method='POST' action='./index.php'>
+				<input id="clidec" name="cliqueDeconnexion" type="submit" value="Deconnexion" class="deconnexion"/>
+			</form>
+			</div>
 	</body>
 </html>

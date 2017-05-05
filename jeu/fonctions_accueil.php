@@ -8,7 +8,7 @@
 		global $id_joueur;
 		global $connexion;
 		
-		$sql = "SELECT DISTINCT j.Online AS online, j.Pseudo AS Pseudo , Max(p.Date_Creation) AS Max_Date, p.Id_Etat AS Id_Etat FROM Joueur j JOIN Partie p ON j.Id_Joueur = p.Id_Initiateur OR j.Id_Joueur = p.Id_Invite WHERE j.Id_Joueur != $id_joueur AND (p.Id_Invite = $id_joueur OR p.Id_Initiateur = $id_joueur) GROUP BY p.Id_Etat, j.Pseudo, j.Online ORDER BY p.Id_Etat";
+		$sql = "SELECT j.Online AS online, j.Pseudo AS Pseudo , p.Date_Creation AS Max_Date, p.Id_Etat AS Id_Etat FROM Joueur j JOIN Partie p ON j.Id_Joueur = p.Id_Initiateur OR j.Id_Joueur = p.Id_Invite WHERE j.Id_Joueur != $id_joueur AND p.Id_Partie = (SELECT Max(Id_Partie) FROM Partie WHERE (j.Id_Joueur = p.Id_Invite AND $id_joueur = p.Id_Initiateur) OR (j.Id_Joueur = p.Id_Initiateur AND $id_joueur = p.Id_Invite)) GROUP BY p.Id_Etat, j.Online, p.Date_Creation, j.Pseudo ORDER BY p.Id_Etat DESC";
 
 		$result = $connexion->query($sql) or die("echec critique2 <br/>".mysqli_error());
 

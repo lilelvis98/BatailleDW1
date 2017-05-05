@@ -148,6 +148,18 @@
 				else
 				{
 					$partie_2 = true;
+
+					$sql = "SELECT Id_Invite FROM Partie WHERE Id_Partie = $id_partie";
+					$result = $connexion->query($sql) or die("echec requete : ".$sql);
+					$data = mysqli_fetch_assoc($result);
+					$id_invite = $data['Id_Invite'];
+
+					$sql = "INSERT INTO Tour(Id_Partie, Id_Tour, Id_Joueur, Id_Carte) VALUES ($id_partie, 1, $id_invite, 0)";
+					$result = $connexion->query($sql) or die("echec requete : ".$sql);
+					if($result == FALSE) // échec si FALSE
+					{
+						echo "Échec de la requête : $sql <br/>";
+					}
 				}
 			}
 		}

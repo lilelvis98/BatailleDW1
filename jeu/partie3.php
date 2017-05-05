@@ -18,7 +18,14 @@ session_start(); ?>
 		?>
 		<?php getadv(); ?>
 		<h1>Il semblerait que <?php echo $pseudo_adv; ?> n'ai pas encore constitué sa flotte<br/>Patience matelot !</h1>
-
+			<?php
+				CreationGrilleadv();
+				GrilleValidable();
+				if($partie_2)
+				{
+					header("Location: ./partie2.php");
+				}
+			?>
 			<div id="boiteconsignes">
 				<form method='POST' action='./accueil.php'>
 					<input id="valider_pos" name="cliquevalider" type="Submit" value="Retourner à l'accueil"/>
