@@ -106,6 +106,11 @@ session_start(); ?>
 					GrillePersoHTML();
 				?>
 			</div>
+			<div id="bouton_deco">
+			<form method='POST' action='./index.php'>
+				<input id="clidec" name="cliqueDeconnexion" type="submit" value="Deconnexion" class="deconnexion"/>
+			</form>
+			</div>
 		</div>
 	</body>
 </html>

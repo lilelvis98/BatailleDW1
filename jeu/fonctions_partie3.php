@@ -267,6 +267,15 @@
 				$data = mysqli_fetch_assoc($result);
 				$id_invite = $data['Id_Invite'];
 
+				$sql = "SELECT Max(Id_Tour) AS max_id_tour FROM Tour";
+				$result = $connexion->query($sql);
+				$data = mysqli_fetch_assoc($result);
+				$nouveau_tour = $data['max_id_tour'] + 1;
+				if($result == FALSE) // échec si FALSE
+				{
+					echo "Échec de la requête : $sql <br/>";
+				}
+
 				$sql = "INSERT INTO Tour(Id_Partie, Id_Tour, Id_Joueur, Id_Carte) VALUES ($id_partie, 1, $id_invite, 0)";
 				$result = $connexion->query($sql) or die("echec requete : ".$sql);
 				if($result == FALSE) // échec si FALSE

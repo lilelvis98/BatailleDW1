@@ -17,19 +17,24 @@ session_start(); ?>
 	<body>
 		<h1>Bienvenue, <?php echo $_SESSION['pseudo_joueur'];?> !</h1>
 		<div id="boutons_accueil">
-			<form id="bouton_accueil" action='jouer.php'>
-				<button id="bouton_stats" type="submit" formaction="statistiques.php">STATISTIQUES</button>
-				<button id="bouton_jouer" type="submit">JOUER</button>
-				<table id="tab_contacts">
-					<th id="th_contact">Contacts</th>
-					<tr id="marge_avant_contacts"></tr>
-					<?php
-						getamis(); 
-					?>
-				</table>
+			<div id="boiteconsignes_stats">
+			<form id="bouton_stats" action='statistiques.php'>
+				<button id="bouton_stats" type="submit">STATISTIQUES</button>
 			</form>
-			
-		</div>
+			</div>
+			<table id="tab_contacts">
+				<th id="th_contact">Contacts</th>
+				<tr id="marge_avant_contacts"></tr>
+				<?php
+					getamis(); 
+				?>
+			</table>
+			<div id="boitejouer">
+			<form id="bouton_jouer" action='jouer.php'>
+				<button id="bouton_jouer" type="submit">JOUER</button>
+				
+			</form>
+			</div>
 
 		<div id="bouton_deco">
 			<form method='POST' action='./index.php'>

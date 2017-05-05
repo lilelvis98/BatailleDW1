@@ -49,6 +49,19 @@ h1{
 	margin-right: auto;
 }
 
+#boiteconsignes_stats{
+	position: fixed;
+	float: left;
+	background-color: #c6d9ec;
+	font-weight: bold;
+ 	width: 300px;
+ 	border: 12px solid #2d5986;
+ 	padding: 20px;
+	margin-left: 3%;
+	margin-right: auto;
+	margin-top: 30px;
+}
+
 #boiteinvitation{
 	background-color: #c6d9ec;
  	width: 40%;
@@ -113,6 +126,18 @@ h1{
 	margin-right: auto;
 }
 
+#boitejouer{
+	float: center;
+	background-color: #8aa88a;
+ 	width: 500px;
+	height: 400px;
+ 	border: 12px solid #396039;
+ 	margin-top: 50px;
+	padding: 20px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
 #boitegrilleadv{
 	float: center;
 	background-color: #604239;
@@ -142,16 +167,13 @@ h1{
 {
 	width: 500px;	
 	height: 400px;
-	margin-left: 7%;
 }
 
 #bouton_stats
 {
-	
-	width: 400px;	
+	float: left;
+	width: 300px;	
 	height: 400px;
-	margin-top: 50px;
-	margin-left: 7%;
 }
 
 #bouton_deco
